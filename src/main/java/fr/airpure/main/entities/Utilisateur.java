@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import fr.airpure.main.dto.RegisterDtoRequest;
+
 @Entity
 public class Utilisateur {
 	@Id
@@ -17,22 +19,32 @@ public class Utilisateur {
 	private Integer id;
 	private String nom;
 	private String prenom;
-	private String pseudo;
+	private String username;
 	private String email;
 
 	private String motDePasse;
 	
 	@OneToMany(mappedBy = "utilisateur", cascade = CascadeType.PERSIST)
 	private List<RoleUtilisateur> roles = new ArrayList<>();
-	
-	
-	public Utilisateur(String nom, String prenom, String email, String motDePasse) {
+
+	public Utilisateur(Integer id, String nom, String prenom, String username, String email, String motDePasse,
+			List<RoleUtilisateur> roles) {
+		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
+		this.username = username;
 		this.email = email;
 		this.motDePasse = motDePasse;
+		this.roles = roles;
 	}
-
+	
+	public Utilisateur(RegisterDtoRequest dtoRequest) {
+		this.nom = dtoRequest.getNom();
+		this.prenom = dtoRequest.getPrenom();
+		this.username = dtoRequest.getUsername();
+		this.email = dtoRequest.getEmail();
+		this.motDePasse = dtoRequest.getPassword();
+	}
 
 	public Utilisateur() {
 		// TODO Auto-generated constructor stub
@@ -68,14 +80,13 @@ public class Utilisateur {
 		this.prenom = prenom;
 	}
 
-
-	public String getPseudo() {
-		return pseudo;
+	public String getUsername() {
+		return username;
 	}
 
 
-	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 
