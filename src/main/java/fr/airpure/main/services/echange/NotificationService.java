@@ -8,6 +8,6 @@ import fr.airpure.main.entities.echange.Notification;
 import fr.airpure.main.repositories.echange.NotificationRepository;
 
 @Service
-public class NotificationService extends echangeBasedService<Notification, NotificationRepository>{
+public class NotificationService extends EchangeBasedService<Notification, NotificationRepository>{
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import fr.airpure.main.entities.echange.Notification;
 import net.bytebuddy.build.ToStringPlugin;
 
 // TODO: Auto-generated Javadoc
@@ -50,6 +51,9 @@ public class Departement extends Entite {
 	@OneToMany
 	@JoinColumn(name="departementCommune")
 	private List<Commune> listeCommunesDepartement = new ArrayList<Commune>();
+//	
+//	@OneToMany(mappedBy = "departement")
+//	private List<Notification> notifications = new ArrayList<>();
 
 	// CONSTRUCTOR **************************************************************************************
 	
@@ -147,8 +151,25 @@ public class Departement extends Entite {
 		this.listeCommunesDepartement = listeCommunesDepartement;
 	}
 	
+	/**
+	 * 
+	 * @return
+//	 */
+//	public List<Notification> getNotifications() {
+//		return notifications;
+//	}
+//	
+//	/**
+//	 * 
+//	 * @param notifications
+//	 */
+//	public void setNotifications(List<Notification> notifications) {
+//		this.notifications = notifications;
+//	}
+	
 	// TOSTRING()  ******************************************************************************
 	
+
 	/**
 	 * To string.
 	 *

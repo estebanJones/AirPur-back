@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.airpure.main.entities.echange.Notification;
-import fr.airpure.main.exception.echange.AlreadyExistsException;
-import fr.airpure.main.exception.echange.NotFoundException;
+import fr.airpure.main.exceptions.echange.AlreadyExistsException;
+import fr.airpure.main.exceptions.echange.NotFoundException;
 import fr.airpure.main.repositories.echange.NotificationRepository;
 
 @RestController
@@ -34,7 +34,7 @@ public class NotificationController{
 	}
 	
 	@GetMapping("/{id}")
-	public Notification getNotification(@PathVariable Long id) {
+	public Notification getNotification(@PathVariable Integer id) {
 		if(notificationRepository.findById(id).isPresent())
 			return notificationRepository.findById(id).get();
 		else return null;
@@ -58,14 +58,14 @@ public class NotificationController{
 	
 	@PreAuthorize("hasAuthority('NOTIF_DELETE')")
 	@DeleteMapping("/{id}")
-	public void deleteNotification(@PathVariable Long id) throws NotFoundException {
+	public void deleteNotification(@PathVariable Integer id) throws NotFoundException {
 		Notification existingNotification = notificationRepository.findById(id).orElseThrow(() -> new NotFoundException());
 		notificationRepository.delete(existingNotification);
 	}
 	
 	@PreAuthorize("hasAuthority('NOTIF_UPDATE')")
 	@PutMapping("/{id}")
-	public Notification updateNotification(@PathVariable Long id, @RequestBody Notification notification) throws NotFoundException {
+	public Notification updateNotification(@PathVariable Integer id, @RequestBody Notification notification) throws NotFoundException {
 		Optional<Notification> existingNotification = notificationRepository.findById(id);
 		if (existingNotification.isPresent()) {
 			notification.setId(id);

@@ -11,6 +11,6 @@ import fr.airpure.main.entities.echange.Message;
 
 @RestController
 @RequestMapping("/api/messages")
-public class MessageController extends echangeBasedController<Message, MessageService>{
+public class MessageController extends EchangeBasedController<Message, MessageService>{
 
 }

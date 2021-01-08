@@ -8,6 +8,6 @@ import fr.airpure.main.entities.echange.Rubrique;
 import fr.airpure.main.repositories.echange.RubriqueRepository;
 
 @Service
-public class RubriqueService extends echangeBasedService<Rubrique,RubriqueRepository>{
+public class RubriqueService extends EchangeBasedService<Rubrique,RubriqueRepository>{
 
 }

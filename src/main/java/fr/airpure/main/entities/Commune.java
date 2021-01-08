@@ -97,7 +97,7 @@ public class Commune extends Entite {
 	 *
 	 * @return the code insee commune
 	 */
-	public int getCodeInseeCommune() {
+	public Integer getCodeInseeCommune() {
 		return codeInseeCommune;
 	}
 
@@ -116,7 +116,7 @@ public class Commune extends Entite {
 	 *
 	 * @return the population totale commune
 	 */
-	public long getPopulationTotaleCommune() {
+	public Integer getPopulationTotaleCommune() {
 		return populationTotaleCommune;
 	}
 

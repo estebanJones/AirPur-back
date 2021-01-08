@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import fr.airpure.main.entities.echange.LongIdEntity;
 
-public abstract class echangeBasedService <T extends LongIdEntity, Repository extends JpaRepository<T, Long>>{
+public abstract class EchangeBasedService <T extends LongIdEntity, Repository extends JpaRepository<T, Integer>>{
 
 	@Autowired
 	protected Repository repository;
@@ -24,7 +24,7 @@ public abstract class echangeBasedService <T extends LongIdEntity, Repository ex
 		return repository.save(entity);
 	}
 	
-	public T update(Long id, T entity) {
+	public T update(Integer id, T entity) {
 		if (!repository.existsById(id)) {
 			throw new RuntimeException("update pas possible, element inexistant");
 		}
@@ -33,11 +33,11 @@ public abstract class echangeBasedService <T extends LongIdEntity, Repository ex
 		return repository.save(entity);
 	}
 	
-	public void remove(Long id) {
+	public void remove(Integer id) {
 		repository.deleteById(id);
 	}
 	
-	public T findById(Long id) {
+	public T findById(Integer id) {
 		 return repository.findById(id).orElse(null);
 		
 	}
