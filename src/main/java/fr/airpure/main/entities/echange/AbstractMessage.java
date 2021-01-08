@@ -35,6 +35,4 @@ public abstract class AbstractMessage extends LongIdEntity {
 	public void setPostedOn(LocalDateTime postedOn) {
 		this.postedOn = postedOn;
 	}
-
-	
 }
