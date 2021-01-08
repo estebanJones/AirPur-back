@@ -40,7 +40,7 @@ public class Departement extends Entite {
 	
 	/** Le numero du département. */
 	@Column(name = "code_departement")
-	private int numDepartement;
+	private String codeDepartement;
 	
 	/** La région du département. */
 	@ManyToOne
@@ -49,7 +49,7 @@ public class Departement extends Entite {
 	
 	/** La liste des communes du departement. */
 	@OneToMany
-	@JoinColumn(name="departementCommune")
+	@JoinColumn(name="departement_id")
 	private List<Commune> listeCommunesDepartement = new ArrayList<Commune>();
 //	
 //	@OneToMany(mappedBy = "departement")
@@ -62,12 +62,12 @@ public class Departement extends Entite {
 	 * La région est elle instancié comme vide.
 	 * La liste des commune est elle instanciée vide.
 	 *
-	 * @param numDepartement the num departement
+	 * @param codeDepartement the num departement
 	 * @param nomDepartement the nom departement
 	 */
-	public Departement(int numDepartement, String nomDepartement) {
+	public Departement(String codeDepartement, String nomDepartement) {
 		super();
-		this.numDepartement = numDepartement;
+		this.codeDepartement = codeDepartement;
 		this.nomDepartement = nomDepartement;
 	}
 	
@@ -84,17 +84,17 @@ public class Departement extends Entite {
 	 *
 	 * @return the num departement
 	 */
-	public int getNumDepartement() {
-		return numDepartement;
+	public String getNumDepartement() {
+		return codeDepartement;
 	}
 
 	/**
 	 * Sets the num departement.
 	 *
-	 * @param numDepartement the new num departement
+	 * @param codeDepartement the new num departement
 	 */
-	public void setNumDepartement(int numDepartement) {
-		this.numDepartement = numDepartement;
+	public void setNumDepartement(String codeDepartement) {
+		this.codeDepartement = codeDepartement;
 	}
 
 	/**
@@ -176,10 +176,10 @@ public class Departement extends Entite {
 	 * @return the string
 	 */
 	public String toString() {
-		String retour = "Nom Departement :" + this.nomDepartement + "\n";
+		String retour = "Nom Departement : " + this.nomDepartement + "\n";
 		retour += "ID Departement:" + this.getId() + "\n";
-		retour += "Numero Departement :" + this.numDepartement + "\n";
-		retour += "Nombre de communes :" + this.listeCommunesDepartement.size() + "\n";
+		retour += "Numero Departement : " + this.codeDepartement + "\n";
+		retour += "Nombre de communes : " + this.listeCommunesDepartement.size() + "\n";
 		retour += "Region :" + this.regionDepartement.getNomRegion() + "\n";
 		
 		return retour;
