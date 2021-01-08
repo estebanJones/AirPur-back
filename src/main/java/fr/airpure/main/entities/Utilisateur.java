@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import fr.airpure.main.dto.RegisterDtoRequest;
-import fr.airpure.main.exceptions.favoris.Favoris;
+import fr.airpure.main.entities.favoris.Favoris;
 
 
 @Entity

@@ -1,4 +1,4 @@
-package fr.airpure.main.exceptions.favoris;
+package fr.airpure.main.entities.favoris;
 
 import java.util.HashSet;
 import java.util.Set;
