@@ -55,13 +55,13 @@ public class JWTAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
 	@Transactional
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-
-		LOG.info("Génération du token JWT");
+			
+		LOG.debug("Génération du token JWT");
 
 		User user = (User) authentication.getPrincipal();
 
 		String rolesList = user.getAuthorities().stream().map(a -> a.getAuthority()).collect(Collectors.joining(","));
-
+		System.out.println("USER " + user.getUsername());
 		Utilisateur utilisateur = this.utilisateurRepo.findByEmail(user.getUsername())
 				.orElseThrow(() -> new IllegalArgumentException("L'email ne correspond à aucun collegue"));
 
