@@ -160,11 +160,11 @@ public class Commune extends Entite {
 	 * @return the string
 	 */
 	public String toString() {
-		String retour = "Nom Commune :" + this.nomCommune + "\n";
-		retour += "ID Commune:" + this.getId() + "\n";
-		retour += "Code INSEE Commune :" + this.codeInseeCommune + "\n";
-		retour += "Departement :" + this.departementCommune.getNomDepartement() + "\n";
-		retour += "Region :" + this.departementCommune.getRegionDepartement().getNomRegion() + "\n";
+		String retour = "Nom Commune : " + this.nomCommune + "\n";
+		retour += "ID Commune : " + this.getId() + "\n";
+		retour += "Code INSEE Commune : " + this.codeInseeCommune + "\n";
+		retour += "Departement : " + this.departementCommune.getNomDepartement() + " - " +  this.getDepartementCommune().getNumDepartement() + "\n";
+		retour += "Region : " + this.departementCommune.getRegionDepartement().getNomRegion() + "\n";
 		
 		return retour;
 	}

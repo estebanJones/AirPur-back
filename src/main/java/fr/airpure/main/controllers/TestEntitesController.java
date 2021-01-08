@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.airpure.main.services.CommuneService;
 
 @RestController
-@RequestMapping("/")
-public class MainController {
+@RequestMapping("/accueil")
+public class TestEntitesController {
 	
 	@Autowired
 	private CommuneService communeService;
 	
-	public MainController() {
+	public TestEntitesController() {
 		super();
 	}
 	
