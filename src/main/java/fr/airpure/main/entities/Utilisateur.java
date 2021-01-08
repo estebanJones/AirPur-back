@@ -2,15 +2,22 @@ package fr.airpure.main.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import fr.airpure.main.dto.RegisterDtoRequest;
+import fr.airpure.main.entities.favoris.Favoris;
+
 
 @Entity
 public class Utilisateur {
@@ -26,7 +33,21 @@ public class Utilisateur {
 	
 	@OneToMany(mappedBy = "utilisateur", cascade = CascadeType.PERSIST)
 	private List<RoleUtilisateur> roles = new ArrayList<>();
-
+	
+	/**
+	 * 
+	 * 
+	 */
+	
+	@ManyToOne
+	//@JoinTable(name = "utilisateur_id", inverseJoinColumns = @JoinColumn(name = "commune_id"))
+	private Commune commune;
+	
+	@OneToMany(mappedBy = "utilisateur")
+	private Set<Favoris> favoris;
+	
+	
+	
 	public Utilisateur(Integer id, String nom, String prenom, String username, String email, String motDePasse,
 			List<RoleUtilisateur> roles) {
 		this.id = id;

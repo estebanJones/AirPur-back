@@ -51,9 +51,11 @@ public class Departement extends Entite {
 	@OneToMany
 	@JoinColumn(name="departement_id")
 	private List<Commune> listeCommunesDepartement = new ArrayList<Commune>();
-//	
-//	@OneToMany(mappedBy = "departement")
-//	private List<Notification> notifications = new ArrayList<>();
+	
+	/** La liste des notification qui concerne le departement. */
+
+	@OneToMany(mappedBy = "departement")
+	private List<Notification> notifications = new ArrayList<>();
 
 	// CONSTRUCTOR **************************************************************************************
 	
@@ -154,18 +156,20 @@ public class Departement extends Entite {
 	/**
 	 * 
 	 * @return
-//	 */
-//	public List<Notification> getNotifications() {
-//		return notifications;
-//	}
-//	
-//	/**
-//	 * 
-//	 * @param notifications
-//	 */
-//	public void setNotifications(List<Notification> notifications) {
-//		this.notifications = notifications;
-//	}
+	 */
+	
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
+	
+	/**
+	 * 
+	 * @param notifications
+	 */
+	
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
+	}
 	
 	// TOSTRING()  ******************************************************************************
 	

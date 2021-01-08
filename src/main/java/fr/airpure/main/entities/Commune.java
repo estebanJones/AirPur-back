@@ -1,9 +1,15 @@
 package fr.airpure.main.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import fr.airpure.main.entities.favoris.Favoris;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -43,6 +49,10 @@ public class Commune extends Entite {
 	@ManyToOne
 	@JoinColumn(name="departement_id")
 	private Departement departementCommune;
+
+	/**  Le choix de commune  */
+	@OneToMany(mappedBy= "commune") 
+	private Set<Favoris> favoris = new HashSet<>();
 
 	
 	// CONSTRUCTEUR **************************************************************************************

@@ -31,6 +31,12 @@ public abstract class EchangeBasedController<T extends LongIdEntity, Service ext
 	public T create(@RequestBody T entity) {
 		return service.create(entity);
 	}
+	/**
+	 * 
+	 * @param id
+	 * @param test Get Mapping
+	 * @return
+	 */
 	
 	@PutMapping("/{id}")
 	public T update(@PathVariable Integer id, @RequestBody T entity) {
