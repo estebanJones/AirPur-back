@@ -4,10 +4,13 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Service;
+
 import fr.airpure.main.dto.RegisterDtoRequest;
 import fr.airpure.main.entities.Utilisateur;
 import fr.airpure.main.repositories.UtilisateurRepository;
 
+@Service
 public class CheckerInscriptionService {
 	private UtilisateurRepository utilisateurRepository;
 	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
