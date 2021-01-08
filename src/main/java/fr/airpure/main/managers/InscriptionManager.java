@@ -1,5 +1,6 @@
 package fr.airpure.main.managers;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import fr.airpure.main.dto.RegisterDtoRequest;
@@ -14,13 +15,16 @@ import fr.airpure.main.services.UtilisateurService;
 public class InscriptionManager {
 	private UtilisateurService utilisateurService;
 	private RoleUtilisateurService roleUtilisateurService;
+	private PasswordEncoder passwordEncoder;
 	
-	public InscriptionManager(UtilisateurService utilisateurService, RoleUtilisateurService roleUtilisateurService) {
+	public InscriptionManager(UtilisateurService utilisateurService, RoleUtilisateurService roleUtilisateurService, PasswordEncoder passwordEncoder) {
 		this.utilisateurService = utilisateurService;
 		this.roleUtilisateurService = roleUtilisateurService;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	public RegisterDtoResponse inscription(RegisterDtoRequest dtoRequest) {
+		this.encodePassword(dtoRequest);
 		Utilisateur utilisateur = this.utilisateurService.creerUtilisateur(dtoRequest);
 		Utilisateur utilisateurDataBase = this.utilisateurService.persist(utilisateur);
 		RoleUtilisateur roleParDefaut = this.assignationRoleUtilisateur(utilisateurDataBase);
@@ -36,5 +40,9 @@ public class InscriptionManager {
 	
 	private RoleUtilisateur creationRoleUtilisateur(Utilisateur utilisateur) {
 		return new RoleUtilisateur(utilisateur, ERole.ROLE_UTILISATEUR);
+	}
+	
+	private void encodePassword(RegisterDtoRequest dtoRequest) {
+		dtoRequest.setPassword(this.passwordEncoder.encode(dtoRequest.getPassword()));
 	}
 }

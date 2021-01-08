@@ -35,7 +35,7 @@ public class CheckerInscriptionService {
 	public boolean checkIfEmailExiste(RegisterDtoRequest dtoRequest) {
 		Optional<Utilisateur> utilisateur = this.utilisateurRepository.findByEmail(dtoRequest.getEmail());
 		if(!utilisateur.isPresent()) {
-			
+			//!TODO terminer l'algo
 		}
 		return true;
 	}
@@ -65,7 +65,7 @@ public class CheckerInscriptionService {
 	
 	public boolean checkProprieteAdresse(RegisterDtoRequest dtoRequest) {
 		if(!dtoRequest.getEmail().isBlank() && !dtoRequest.getNom().isBlank()
-			&& !dtoRequest.getPrenom().isBlank() && dtoRequest.getUsername().isBlank()
+			&& !dtoRequest.getPrenom().isBlank() && !dtoRequest.getUsername().isBlank()
 			&& !dtoRequest.getPassword().isBlank()) {	
 				return true;
 			}else {
