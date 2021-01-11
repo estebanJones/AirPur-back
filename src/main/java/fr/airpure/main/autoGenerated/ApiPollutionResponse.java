@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "crs",
     "features"
 })
-public class IndicateurPollutionAir {
+public class ApiPollutionResponse {
 
     @JsonProperty("type")
 	public String type;
@@ -85,7 +85,7 @@ public class IndicateurPollutionAir {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(IndicateurPollutionAir.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
+        sb.append(ApiPollutionResponse.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("type");
         sb.append('=');
         sb.append(((this.type == null)?"<null>":this.type));
@@ -130,10 +130,10 @@ public class IndicateurPollutionAir {
         if (other == this) {
             return true;
         }
-        if ((other instanceof IndicateurPollutionAir) == false) {
+        if ((other instanceof ApiPollutionResponse) == false) {
             return false;
         }
-        IndicateurPollutionAir rhs = ((IndicateurPollutionAir) other);
+        ApiPollutionResponse rhs = ((ApiPollutionResponse) other);
         return ((((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.features == rhs.features)||((this.features!= null)&&this.features.equals(rhs.features))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.crs == rhs.crs)||((this.crs!= null)&&this.crs.equals(rhs.crs))));
     }
 

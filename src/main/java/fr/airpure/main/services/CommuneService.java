@@ -1,9 +1,9 @@
 package fr.airpure.main.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 
 import fr.airpure.main.entities.Commune;
@@ -52,6 +52,10 @@ public class CommuneService {
 	
 	public Commune save(Commune commune) {
 		return this.repoCommune.save(commune);
+	}
+	
+	public List<Commune> getTop50Population() {
+		return this.repoCommune.getTop50Population();
 	}
 	
 
