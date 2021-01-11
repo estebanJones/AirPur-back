@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 
 import fr.airpure.main.entities.Commune;
+import fr.airpure.main.exceptions.echange.NotFoundException;
 import fr.airpure.main.repositories.CommuneRepository;
 
 // TODO: Auto-generated Javadoc
@@ -40,8 +41,17 @@ public class CommuneService {
 		System.out.println(commune3.toString());
 	}
 	
-	public Optional<Commune> findByCodeInsee(String codeInsee) {
-		return this.repoCommune.findByCodeInseeCommune(codeInsee);
+	public Commune findByCodeInsee(String codeInsee) throws NotFoundException {
+		Optional<Commune> commune = this.repoCommune.findByCodeInseeCommune(codeInsee);
+		if(commune.isPresent()) {
+			return commune.get();
+		} else {
+			throw new NotFoundException();
+		}
+	}
+	
+	public Commune save(Commune commune) {
+		return this.repoCommune.save(commune);
 	}
 	
 
