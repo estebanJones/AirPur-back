@@ -1,5 +1,7 @@
 package fr.airpure.main.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,10 @@ public class CommuneService {
 	public void test() {
 		Commune commune3 = this.repoCommune.findById(3).get();
 		System.out.println(commune3.toString());
+	}
+	
+	public Optional<Commune> findByCodeInsee(String codeInsee) {
+		return this.repoCommune.findByCodeInseeCommune(codeInsee);
 	}
 	
 
