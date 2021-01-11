@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.airpure.main.services.CommuneService;
+import fr.airpure.main.dao.CommuneDAO;
 
 @RestController
 @RequestMapping("/accueil")
 public class TestEntitesController {
 	
 	@Autowired
-	private CommuneService communeService;
+	private CommuneDAO communeDAO;
 	
 	public TestEntitesController() {
 		super();
@@ -20,6 +20,6 @@ public class TestEntitesController {
 	
 	@GetMapping
 	public void test() {
-		this.communeService.test();
+		
 	}
 }
