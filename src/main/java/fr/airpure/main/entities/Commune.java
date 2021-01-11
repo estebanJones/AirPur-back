@@ -1,6 +1,8 @@
 package fr.airpure.main.entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -53,7 +55,12 @@ public class Commune extends Entite {
 	/**  Le choix de commune  */
 	@OneToMany(mappedBy= "commune") 
 	private Set<Favoris> favoris = new HashSet<>();
-
+	
+	@OneToMany(mappedBy = "commune")
+	Set<Station> stations = new HashSet<>();
+	
+	@OneToMany(mappedBy = "commune")
+	Set<MeteoIndicateur> meteoIndicateurs = new HashSet<>();
 	/**  coordonées à récupérés  */
 	private double Longitude;
 	
