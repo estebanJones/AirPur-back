@@ -17,6 +17,8 @@ import org.springframework.web.filter.CorsFilter;
 import fr.airpure.main.managers.ExtractAtmoApiManager;
 import fr.airpure.main.managers.ExtractMeteoConceptManager;
 
+
+
 /**
  * The Class AirPureApplication.
  */
@@ -67,9 +69,11 @@ public class AirPureApplication {
 	//@Scheduled(fixedRate=60*60*1000)
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
 		return args -> {
+
 //			this.extractAtmoApiManager.extract(restTemplate);
 //			this.extractMeteoConceptManager.run(restTemplate);
 		};
+
 	}
 
 
