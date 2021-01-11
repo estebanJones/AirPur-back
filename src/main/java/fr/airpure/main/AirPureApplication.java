@@ -100,21 +100,27 @@ public class AirPureApplication {
 */	
 			LireEnBase();
 			
-			String url ="jdbc:mysql://localhost:8889/airpur";
+			String url ="jdbc:mysql://localhost:3308/airpur";
 			String login	="root";
-			String password ="root";
+			String password ="";
 			
 			Connection cn = null; java.sql.Statement st = null; ResultSet rs = null;
 			try	{
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				//
 				cn = DriverManager.getConnection(url, login, password);
+				
+				/////////////////////////////////////
 				//
 				st = cn.createStatement();
-				String sql = "SELECT * FROM commune WHERE departement_id=" + 31;
-				
-				rs = st.executeQuery(sql);
 
+				String sql = "SELECT C2.id FROM commune as C2 \r\n"
+						+ "INNER JOIN departement ON C2.departement_id = departement.id\r\n"
+						+ "INNER JOIN region ON region.id = departement.region_id\r\n"
+						+ "WHERE region.id = 5";
+				
+				//rs = st.executeQuery(sql);
+				
 				System.out.println(obj.getClass());
 				System.out.println(obj.getFeatures());
 				List<Feature> maListe = obj.getFeatures();
@@ -127,17 +133,17 @@ public class AirPureApplication {
 						System.out.println(m.getProperties().getInseeCom());
 						System.out.println(m.getProperties().getNomCom());
 							//insertion sql Latitude
-						String sql2 = "UPDATE commune " + " SET latitude = '"+ m.getProperties().getxL93() + "' " + " WHERE code_insee='"+ m.getProperties().getInseeCom() + "';";
+						String sql2 = "UPDATE commune as C" + " SET C.latitude = '"+ m.getProperties().getxL93() + "' " + " WHERE C.id IN ( "+ sql + ");";
 						st.executeUpdate(sql2);
 						//insertion sql Longitude
-						String sql3 = "UPDATE commune " + " SET longitude = '"+ m.getProperties().getyL93() + "' " + " WHERE code_insee='"+ m.getProperties().getInseeCom() + "';";
-						st.executeUpdate(sql3);
+						//String sql3 = "UPDATE commune " + " SET longitude = '"+ m.getProperties().getyL93() + "' " + " WHERE code_insee='"+ m.getProperties().getInseeCom() + "';";
+						//st.executeUpdate(sql3);	
 						
-						
+						//String optiUpdate =  "UPDATE commune " + " SET latitude = '"+ m.getProperties().getxL93() + "' " + " WHERE commune.id IN' "+ sql; 
 					}
 				
 				
-				
+		///////////////////////		
 			}
 			catch (SQLException e) {
 				// TODO: handle exception
