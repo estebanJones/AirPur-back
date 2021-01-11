@@ -54,6 +54,11 @@ public class Commune extends Entite {
 	@OneToMany(mappedBy= "commune") 
 	private Set<Favoris> favoris = new HashSet<>();
 
+	/**  coordonées à récupérés  */
+	private double Longitude;
+	
+	private double Latitude;
+
 	
 	// CONSTRUCTEUR **************************************************************************************
 	
@@ -65,11 +70,13 @@ public class Commune extends Entite {
 	 * @param codeInseeCommune the code insee commune
 	 * @param populationTotaleCommune the population totale commune
 	 */
-	public Commune(String nomCommune, int codeInseeCommune, int populationTotaleCommune) {
+	public Commune(String nomCommune, int codeInseeCommune, int populationTotaleCommune, double Longitude, double Latitude) {
 		super();
 		this.nomCommune = nomCommune;
 		this.codeInseeCommune = codeInseeCommune;
 		this.populationTotaleCommune = populationTotaleCommune;
+		this.Longitude = Longitude;
+		this.Latitude = Latitude;
 
 	}
 		
@@ -159,6 +166,35 @@ public class Commune extends Entite {
 	public void setDepartementCommune(Departement departementCommune) {
 		this.departementCommune = departementCommune;
 	}
+	
+	public Set<Favoris> getFavoris() {
+		return favoris;
+	}
+
+
+	public void setFavoris(Set<Favoris> favoris) {
+		this.favoris = favoris;
+	}
+
+
+	public double getLongitude() {
+		return Longitude;
+	}
+
+
+	public void setLongitude(double longitude) {
+		Longitude = longitude;
+	}
+
+
+	public double getLatitude() {
+		return Latitude;
+	}
+
+
+	public void setLatitude(double latitude) {
+		Latitude = latitude;
+	}
 
 	
 	// TOSTRING()  ******************************************************************************
@@ -179,4 +215,6 @@ public class Commune extends Entite {
 		return retour;
 	}
 
+
+	
 }

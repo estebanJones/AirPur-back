@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class IndicateurPollutionAir {
 
     @JsonProperty("type")
-    private String type;
+	public String type;
     @JsonProperty("name")
     private String name;
     @JsonProperty("crs")
