@@ -126,7 +126,7 @@ public class AirPureApplication {
 				List<Feature> maListe = obj.getFeatures();
 				System.out.println("----------------------------");
 				System.out.println(maListe.size());
-
+				maListe.stream().map(e -> e.getProperties().getxL93()).distinct().forEach(i -> System.out.println(i));
 					for (Feature m : maListe) {
 						System.out.println(m.getProperties().getxL93());
 						System.out.println(m.getProperties().getyL93());
