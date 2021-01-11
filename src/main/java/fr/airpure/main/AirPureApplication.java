@@ -103,7 +103,7 @@ public class AirPureApplication {
 			String url ="jdbc:mysql://localhost:8889/airpur";
 			String login	="root";
 			String password ="root";
-			System.out.println("OKOKSOKDKQSKODK");
+			
 			Connection cn = null; java.sql.Statement st = null; ResultSet rs = null;
 			try	{
 				Class.forName("com.mysql.cj.jdbc.Driver");
@@ -111,16 +111,10 @@ public class AirPureApplication {
 				cn = DriverManager.getConnection(url, login, password);
 				//
 				st = cn.createStatement();
-				String sql = "SELECT * FROM commune";
+				String sql = "SELECT * FROM commune WHERE departement_id=" + 31;
 				
 				rs = st.executeQuery(sql);
-				
 
-				// log.info("mouss" + obj.toString());
-				// String json= obj.toString();
-
-				// System.out.println("Md" + obj.getType());
-				
 				System.out.println(obj.getClass());
 				System.out.println(obj.getFeatures());
 				List<Feature> maListe = obj.getFeatures();
