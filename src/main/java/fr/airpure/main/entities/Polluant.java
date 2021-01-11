@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Polluant extends Entite {
 	private String nom;
-	private String symbole;
 	private double valeur;
 	private String unite;
 	private LocalDateTime dateDebut;
@@ -25,15 +24,13 @@ public class Polluant extends Entite {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Polluant(String nom, String symbole, double valeur, String unite, LocalDateTime dateDebut,
-			LocalDateTime dateFin, Station station) {
+	public Polluant(String nom, double valeur, String unite, LocalDateTime dateDebut,
+			LocalDateTime dateFin) {
 		this.nom = nom;
-		this.symbole = symbole;
 		this.valeur = valeur;
 		this.unite = unite;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.station = station;
 	}
 
 	public String getNom() {
@@ -42,14 +39,6 @@ public class Polluant extends Entite {
 
 	public void setNom(String nom) {
 		this.nom = nom;
-	}
-
-	public String getSymbole() {
-		return symbole;
-	}
-
-	public void setSymbole(String symbole) {
-		this.symbole = symbole;
 	}
 
 	public double getValeur() {
