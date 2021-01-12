@@ -74,17 +74,22 @@ public class AirPureApplication {
 	@Bean
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
 		return args -> {
-			
-			// Pour air
+			/*
+			// Pour air avec AtmoOccitanie
 			ApiPollutionResponse obj = restTemplate.getForObject(
 					"https://opendata.arcgis.com/datasets/4a648b54876f485e92f22e2ad5a5da32_0.geojson",
 					ApiPollutionResponse.class);
-			
-			// Pour Meteo
+			*/
+			// Pour Meteo avec Meteo Concept
 			ApiMeteoResponse listeMeteoIndicateur = restTemplate.getForObject(
-					"https://api.meteo-concept.com/api/forecast/nextHours?token=e0273c6a00bd49b8818bde2b0592462997feedb4d1abf0b2ccbd8b892623d3d6&insee=35238",	
+					"https://api.meteo-concept.com/api/forecast/nextHours?token=8c7d59aba8b61f1963ff816bd5cc05abbd35ee37cbe0848b2862a18a46973402",	
 					ApiMeteoResponse.class);
-			log.info("Polluant" + listeMeteoIndicateur.getCity());
+			System.out.println("aaaaa1");
+			//log.info("Polluant" + listeMeteoIndicateur.getCity());
+			
+			System.out.println(listeMeteoIndicateur);
+			
+			
 			
 			// log.info("mouss" + obj.toString());
 			// String json= obj.toString();
