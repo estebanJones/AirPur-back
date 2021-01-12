@@ -35,8 +35,9 @@ public class InscriptionController {
 			if(this.inscriptionManager.controleInscriptionProprietes(dtoRequest)) {
 				RegisterDtoResponse response = this.inscriptionManager.inscription(dtoRequest);
 				return ResponseEntity.ok(response);
-			} else {
-				return ResponseEntity.badRequest().body(new FormulaireIncompletException("Veuillez remplir les champs correctement"));
+			}
+			else {
+				return ResponseEntity.badRequest().body(new FormulaireIncompletException("Le formulaire est incomplet."));
 			}
 		} else {
 			return ResponseEntity.badRequest().body(new RequeteErreurException("Une erreur est survenue"));
