@@ -70,8 +70,8 @@ public class AirPureApplication {
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
 		return args -> {
 
-//			this.extractAtmoApiManager.extract(restTemplate);
-//			this.extractMeteoConceptManager.run(restTemplate);
+		//	this.extractAtmoApiManager.extract(restTemplate);
+		//	this.extractMeteoConceptManager.run(restTemplate);
 		};
 
 	}
