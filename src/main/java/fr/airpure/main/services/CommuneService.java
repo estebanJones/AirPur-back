@@ -1,4 +1,4 @@
-package fr.airpure.main.dao;
+package fr.airpure.main.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +15,10 @@ import fr.airpure.main.repositories.CommuneRepository;
  * The Class CommuneService.
  */
 @Service
-public class CommuneDAO {
+public class CommuneService {
 	private CommuneRepository communeRepository;
 
-	public CommuneDAO(CommuneRepository communeRepository) {
+	public CommuneService(CommuneRepository communeRepository) {
 		this.communeRepository = communeRepository;
 	}
 	
