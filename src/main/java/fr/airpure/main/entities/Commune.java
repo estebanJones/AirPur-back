@@ -41,11 +41,11 @@ public class Commune extends Entite {
 	
 	/** Le code INSEE affecté à la commune. */
 	@Column(name = "code_insee")
-	private int codeInseeCommune;
+	private String codeInseeCommune;
 	
 	/** La population totale recensee par l'INSEE. */
 	@Column(name = "population_totale")
-	private int populationTotaleCommune;
+	private Integer populationTotaleCommune;
 	
 	/** Le département dans lequel se situe la commune. */
 	@ManyToOne
@@ -77,8 +77,7 @@ public class Commune extends Entite {
 	 * @param codeInseeCommune the code insee commune
 	 * @param populationTotaleCommune the population totale commune
 	 */
-	public Commune(String nomCommune, int codeInseeCommune, int populationTotaleCommune, double Longitude, double Latitude) {
-		super();
+	public Commune(String nomCommune, String codeInseeCommune, Integer populationTotaleCommune, double Longitude, double Latitude) {
 		this.nomCommune = nomCommune;
 		this.codeInseeCommune = codeInseeCommune;
 		this.populationTotaleCommune = populationTotaleCommune;
@@ -121,7 +120,7 @@ public class Commune extends Entite {
 	 *
 	 * @return the code insee commune
 	 */
-	public Integer getCodeInseeCommune() {
+	public String getCodeInseeCommune() {
 		return codeInseeCommune;
 	}
 
@@ -130,7 +129,7 @@ public class Commune extends Entite {
 	 *
 	 * @param codeInseeCommune the new code insee commune
 	 */
-	public void setCodeInseeCommune(int codeInseeCommune) {
+	public void setCodeInseeCommune(String codeInseeCommune) {
 		this.codeInseeCommune = codeInseeCommune;
 	}
 	
