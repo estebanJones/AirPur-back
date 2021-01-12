@@ -1,4 +1,4 @@
-package fr.airpure.main.services;
+package fr.airpure.main.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
