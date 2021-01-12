@@ -81,6 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.authorizeRequests() // toutes les requêtes doivent être authentifiées
 					.antMatchers("/accueil/**")
 					.permitAll()
+					// Pour tester mes requétes
 					.antMatchers("/api/messages")
 					.permitAll()
 					.anyRequest()

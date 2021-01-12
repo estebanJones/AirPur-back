@@ -50,11 +50,15 @@ public class NotificationController{
 	@PreAuthorize("hasAuthority('NOTIF_CREATE')")
 	@PostMapping
 	public Notification createNotification(@RequestBody Notification notification) throws AlreadyExistsException {
+		//Pour chaque utilisateur : notification.setUtilisateur de Utilisateur
 		if (notification.getId() == null) {
 			return notificationRepository.save(notification);
 		} 	
 		throw new AlreadyExistsException();
 	}
+	
+	
+	
 	
 	@PreAuthorize("hasAuthority('NOTIF_DELETE')")
 	@DeleteMapping("/{id}")

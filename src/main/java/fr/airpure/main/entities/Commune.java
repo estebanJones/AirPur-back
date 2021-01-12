@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import fr.airpure.main.entities.favoris.Favoris;
-
 // TODO: Auto-generated Javadoc
 /**
  * <b> Commune est la classe représentant la localité géographique, exemple: Montpellier.  </b>

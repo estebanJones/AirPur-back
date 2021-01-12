@@ -1,78 +1,93 @@
-package fr.airpure.main.entities.favoris;
+package fr.airpure.main.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 /**
  * FavorisClass
  * Determine le commune de choix de l'utilisateur 
  * l'affichage ou on de qu'elle type de mesure
  */
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import fr.airpure.main.entities.Commune;
-import fr.airpure.main.entities.Utilisateur;
+
 @Entity
 public class Favoris {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	private Integer id;
-	//@OneToMany
 	@ManyToOne
-	//private Set<Commune> communes = new HashSet<>();
 	private Commune commune;
 	@ManyToOne
 	private Utilisateur utilisateur;
-	
 	private boolean meteo;
 	private boolean air;
-	private boolean recensement;
+	private LocalDateTime ChoixDateDebut;
+	private LocalDateTime ChoixDateFin;
+	
 	// CONSTRUCTEURS
 	public Favoris() {
 		super();
 	}
+
+	
+	// GETTERS & SETTERS
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public Commune getCommune() {
 		return commune;
 	}
+
 	public void setCommune(Commune commune) {
 		this.commune = commune;
 	}
+
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
+
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
+
 	public boolean isMeteo() {
 		return meteo;
 	}
+
 	public void setMeteo(boolean meteo) {
 		this.meteo = meteo;
 	}
+
 	public boolean isAir() {
 		return air;
 	}
+
 	public void setAir(boolean air) {
 		this.air = air;
 	}
-	public boolean isRecensement() {
-		return recensement;
+
+	public LocalDateTime getChoixDateDebut() {
+		return ChoixDateDebut;
 	}
-	public void setRecensement(boolean recensement) {
-		this.recensement = recensement;
+
+	public void setChoixDateDebut(LocalDateTime choixDateDebut) {
+		ChoixDateDebut = choixDateDebut;
 	}
-	
-	
-	
+
+	public LocalDateTime getChoixDateFin() {
+		return ChoixDateFin;
+	}
+
+	public void setChoixDateFin(LocalDateTime choixDateFin) {
+		ChoixDateFin = choixDateFin;
+	}
 }
