@@ -1,5 +1,7 @@
 package fr.airpure.main.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import fr.airpure.main.dto.RegisterDtoRequest;
@@ -14,6 +16,10 @@ public class UtilisateurService {
 		this.utilisateurRepo = utilisateurRepo;
 	}
 	
+	public List<Utilisateur> getAllUtilisateurs() {
+		return this.utilisateurRepo.findAll();
+		
+	}
 	public Utilisateur creerUtilisateur(RegisterDtoRequest dtoRequest) {
 		return new Utilisateur(dtoRequest);
 		

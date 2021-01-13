@@ -1,6 +1,7 @@
 package fr.airpure.main.entities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import fr.airpure.main.dto.RegisterDtoRequest;
+import fr.airpure.main.entities.echange.Notification;
 import fr.airpure.main.entities.favoris.Favoris;
 
 
@@ -32,7 +34,14 @@ public class Utilisateur {
 	private String motDePasse;
 	
 	@OneToMany(mappedBy = "utilisateur", cascade = CascadeType.PERSIST)
-	private List<RoleUtilisateur> roles = new ArrayList<>();
+	private Set<RoleUtilisateur> roles = new HashSet<>();
+	
+	@ManyToMany
+	@JoinTable(name="notification_utilisateur",
+		joinColumns = @JoinColumn(name="utilisateur_id", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name="notification_id", referencedColumnName = "id")
+	)
+	private Set<Notification> notifications = new HashSet<>();;
 	
 	/**
 	 * 
@@ -49,7 +58,7 @@ public class Utilisateur {
 	
 	
 	public Utilisateur(Integer id, String nom, String prenom, String username, String email, String motDePasse,
-			List<RoleUtilisateur> roles) {
+			Set<RoleUtilisateur> roles) {
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -131,12 +140,12 @@ public class Utilisateur {
 	}
 
 
-	public List<RoleUtilisateur> getRoles() {
+	public Set<RoleUtilisateur> getRoles() {
 		return roles;
 	}
 
 
-	public void setRoles(List<RoleUtilisateur> roles) {
+	public void setRoles(Set<RoleUtilisateur> roles) {
 		this.roles = roles;
 	}
 	
