@@ -13,4 +13,5 @@ import fr.airpure.main.entities.Departement;
  */
 public interface DepartementRepository extends JpaRepository<Departement, Integer>{
 	Optional<Departement> findByNomDepartement(String nomDepartement);
+	Optional<Departement> findByCodeDepartement(String codeDepartement);
 }
