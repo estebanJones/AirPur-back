@@ -2,6 +2,7 @@ package fr.airpure.main;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,8 +15,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import fr.airpure.main.controllers.ApiExtractController;
 import fr.airpure.main.managers.ExtractAtmoApiManager;
-import fr.airpure.main.managers.ExtractMeteoConceptManager;
+
+import fr.airpure.main.managers.ExtractMeteoApiManager;
+
+import fr.airpure.main.repositories.CommuneRepository;
 
 
 
@@ -27,12 +32,14 @@ import fr.airpure.main.managers.ExtractMeteoConceptManager;
 @Transactional
 @EnableScheduling
 public class AirPureApplication {
-	private ExtractAtmoApiManager extractAtmoApiManager;
-	private ExtractMeteoConceptManager extractMeteoConceptManager;
 	
-	public AirPureApplication(ExtractAtmoApiManager extractAtmoApiManager, ExtractMeteoConceptManager extractMeteoConceptManager) {
-		this.extractAtmoApiManager = extractAtmoApiManager;
-		this.extractMeteoConceptManager = extractMeteoConceptManager;
+	@Autowired
+	ApiExtractController apiController;
+	
+	@Autowired
+	private CommuneRepository repo;
+	
+	public AirPureApplication() {
 	}
 	
 
@@ -66,12 +73,14 @@ public class AirPureApplication {
 	 */
 
 	@Bean
-	//@Scheduled(fixedRate=60*60*1000)
-	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+	public CommandLineRunner run() throws Exception {
 		return args -> {
-
-		//	this.extractAtmoApiManager.extract(restTemplate);
-		//	this.extractMeteoConceptManager.run(restTemplate);
+		/**
+		 * A but de test, lance une extraction au lancement pour avoir des données Pollution et Météo à chaque Run
+		 */
+		 
+		 this.apiController.autoExtractPollution();
+		this.apiController.autoExtractMeteo();
 		};
 
 	}

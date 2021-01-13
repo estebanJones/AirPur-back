@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,36 +24,46 @@ import fr.airpure.main.utils.DateUtils;
 
 @Service
 public class ExtractAtmoApiManager {
+	
 	private static final Logger LOG = LoggerFactory.getLogger(ExtractAtmoApiManager.class);
 	private static final String PATH_ATMO = "https://opendata.arcgis.com/datasets/4a648b54876f485e92f22e2ad5a5da32_0.geojson";
 	
 	private DateUtils dateUtils;
 	private CommuneService communeService;
 	private StationService stationService;
-	private PolluantService polluantService;
+	 private PolluantService polluantService;
+	RestTemplate restTemplate;
 	
-	public ExtractAtmoApiManager(DateUtils dateUtils, CommuneService communeService, StationService stationService,  PolluantService polluantService) {
+	
+	public ExtractAtmoApiManager(DateUtils dateUtils, CommuneService communeService, StationService stationService,  PolluantService polluantService, RestTemplate restTemplate) {
 		this.dateUtils = dateUtils;
 		this.communeService = communeService;
 		this.stationService = stationService;
 		this.polluantService = polluantService;
+		this.restTemplate = restTemplate;
 	}
 	
-	
-	public void extract(RestTemplate restTemplate) {
-			List<Feature> maListe = this.getDatasFromAtmo(restTemplate);
+	public void extract() {
+			
 			long start = System.currentTimeMillis();
-			LOG.info("Debut de la lecture du fichier JSON");
-			this.extract(maListe);
+			LOG.info("Debut de Extraction API Pollution");
+		
+			List<Feature> maListe = this.getDatasFromAtmo(restTemplate);
+			
+			List<Feature> maListeEachHour = maListe.subList(0, 100);
+			
+		
+			this.extract(maListeEachHour);
 			long tempsExecution = System.currentTimeMillis() - start;
-			LOG.info("Fin du programme");
-			LOG.info("--------------------------------------");
+			LOG.info("Fin Extraction API Pollution");
 			LOG.info("Temps d'execution " + tempsExecution);
+			LOG.info("--------------------------------------");
+			
 	}
 	
 	public void extract(List<Feature> maListe) {
 		for (Feature m : maListe) {
-			LOG.info("Formattage des dates terminés");
+			//LOG.info("Formattage des dates terminés");
 			try {
 				// POUR CHAQUE LIGNE JE CREAIS UN POLLUANT ET UNE STATION
 				// JE CHERCHE LA REGION PAR CODE INSEE DE LA COMMUNE TRAITEE
@@ -67,14 +79,14 @@ public class ExtractAtmoApiManager {
 				station.setCommune(commune);
 				//PERSIST STATION
 				Station stationDataBase = this.stationService.save(station);
-				LOG.info("Station créée et persistées");
+				//LOG.info("Station créée et persistées");
 				// CREATION POLLUANT
 				Polluant polluant = this.polluantService.creer(m, dateDebutFinale, dateFinFinale);
 				// JOINTURE POLLUANT STATION
 				polluant.setStation(stationDataBase);
 				// PERSIST POLLUANT
 				this.polluantService.save(polluant);
-				LOG.info("Polluant créé et persistés");
+				//LOG.info("Polluant créé et persistés");
 			} catch (NotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
