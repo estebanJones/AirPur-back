@@ -74,6 +74,9 @@ public class NotificationController{
 		}
 	}
 	
+	
+	
+	
 	@PreAuthorize("hasAuthority('NOTIF_DELETE')")
 	@DeleteMapping("/{id}")
 	public void deleteNotification(@PathVariable Integer id) throws NotFoundException {
