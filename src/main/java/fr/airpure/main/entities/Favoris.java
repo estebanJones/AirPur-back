@@ -2,6 +2,7 @@ package fr.airpure.main.entities;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 /**
  * FavorisClass
  * Determine le commune de choix de l'utilisateur 
@@ -23,10 +24,15 @@ public class Favoris {
 	private Commune commune;
 	@ManyToOne
 	private Utilisateur utilisateur;
+	
 	private boolean meteo;
 	private boolean air;
-	private LocalDateTime ChoixDateDebut;
-	private LocalDateTime ChoixDateFin;
+	
+	@Column()
+	private LocalDateTime choixDateDebut;
+	@Column()
+	private LocalDateTime choixDateFin;
+	
 	
 	// CONSTRUCTEURS
 	public Favoris() {
@@ -75,19 +81,25 @@ public class Favoris {
 		this.air = air;
 	}
 
+
 	public LocalDateTime getChoixDateDebut() {
-		return ChoixDateDebut;
+		return choixDateDebut;
 	}
+
 
 	public void setChoixDateDebut(LocalDateTime choixDateDebut) {
-		ChoixDateDebut = choixDateDebut;
+		this.choixDateDebut = choixDateDebut;
 	}
+
 
 	public LocalDateTime getChoixDateFin() {
-		return ChoixDateFin;
+		return choixDateFin;
 	}
 
+
 	public void setChoixDateFin(LocalDateTime choixDateFin) {
-		ChoixDateFin = choixDateFin;
+		this.choixDateFin = choixDateFin;
 	}
+
+	
 }
