@@ -2,6 +2,8 @@ package fr.airpure.main.managers;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -48,11 +50,19 @@ public class ExtractAtmoApiManager {
 			long start = System.currentTimeMillis();
 			LOG.info("Debut de Extraction API Pollution");
 		
+			//La liste complête des relevés fournis par le JSON
 			List<Feature> maListe = this.getDatasFromAtmo(restTemplate);
 			
+			//On ne veut que les 100 premiers car il y a moins de 100 nouveaux enregistrements par heure
 			List<Feature> maListeEachHour = maListe.subList(0, 100);
 			
-		
+			//On créer un comparateur custom pour pouvoir trier nos relevés par leurs date_fin
+			//Comparator<Feature> compareByDate = (Feature f1, Feature f2) -> f1.getProperties().getDateFin().compareTo( f2.getProperties().getDateFin() );
+			//Collections.sort(maListe, compareByDate);
+			
+			LOG.info("DATE_FIN RELEVE LE PLUS VIEUX " + maListeEachHour.get(0).getProperties().getDateFin() );
+			LOG.info("DATE_FIN RELEVE LE PLUS RECENT " + maListeEachHour.get(maListeEachHour.size()-1).getProperties().getDateFin());
+				
 			this.extract(maListeEachHour);
 			long tempsExecution = System.currentTimeMillis() - start;
 			LOG.info("Fin Extraction API Pollution");
