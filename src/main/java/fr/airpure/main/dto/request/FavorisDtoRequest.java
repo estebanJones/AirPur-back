@@ -1,17 +1,17 @@
-package fr.airpure.main.dto;
+package fr.airpure.main.dto.request;
 
 import java.time.LocalDateTime;
 
 import fr.airpure.main.entities.Commune;
 
-public class FavorisDto {
+public class FavorisDtoRequest {
 	private Commune commune;
 	private Boolean meteo;
 	private Boolean air;
 	private LocalDateTime ChoixDateDebut;
 	private LocalDateTime ChoixDateFin;
 	
-	public FavorisDto(Commune commune, Boolean meteo, Boolean air, LocalDateTime choixDateDebut,
+	public FavorisDtoRequest(Commune commune, Boolean meteo, Boolean air, LocalDateTime choixDateDebut,
 			LocalDateTime choixDateFin) {
 		super();
 		this.commune = commune;

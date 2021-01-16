@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import fr.airpure.main.dto.RegisterDtoRequest;
+import fr.airpure.main.dto.request.RegisterDtoRequest;
 import fr.airpure.main.entities.echange.Notification;
 
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import fr.airpure.main.dto.RegisterDtoRequest;
+import fr.airpure.main.dto.request.RegisterDtoRequest;
 import fr.airpure.main.entities.Utilisateur;
 import fr.airpure.main.repositories.UtilisateurRepository;
 

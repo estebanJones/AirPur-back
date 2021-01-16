@@ -16,6 +16,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import fr.airpure.main.controllers.ApiExtractController;
+import fr.airpure.main.controllers.InitialDataController;
+import fr.airpure.main.managers.BaseDataManager;
 import fr.airpure.main.managers.ExtractAtmoApiManager;
 
 import fr.airpure.main.managers.ExtractMeteoApiManager;
@@ -35,6 +37,9 @@ public class AirPureApplication {
 	
 	@Autowired
 	ApiExtractController apiController;
+	
+	@Autowired
+	InitialDataController initDataController;
 	
 	@Autowired
 	private CommuneRepository repo;
@@ -79,8 +84,10 @@ public class AirPureApplication {
 		 * A but de test, lance une extraction au lancement pour avoir des données Pollution et Météo à chaque Run
 		 */
 		 
-		 this.apiController.autoExtractPollution();
-		this.apiController.autoExtractMeteo();
+		this.initDataController.initData();
+			
+		//this.apiController.autoExtractPollution();
+		//this.apiController.autoExtractMeteo();
 		};
 
 	}

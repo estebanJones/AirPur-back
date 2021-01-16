@@ -2,8 +2,8 @@ package fr.airpure.main.managers;
 
 import org.springframework.stereotype.Component;
 
-import fr.airpure.main.dto.RegisterDtoRequest;
-import fr.airpure.main.dto.RegisterDtoResponse;
+import fr.airpure.main.dto.request.RegisterDtoRequest;
+import fr.airpure.main.dto.response.RegisterDtoResponse;
 import fr.airpure.main.entities.RoleUtilisateur;
 import fr.airpure.main.entities.Utilisateur;
 import fr.airpure.main.services.CheckerInscriptionService;

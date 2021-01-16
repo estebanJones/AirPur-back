@@ -1,19 +1,15 @@
-package fr.airpure.main.dto;
+package fr.airpure.main.dto.response;
 
-public class ResponseFavorisDto {
+public class NotificationDtoResponse {
 	private String message;
-
-	public ResponseFavorisDto(String message) {
-		super();
+	
+	public NotificationDtoResponse(String message) {
 		this.message = message;
 	}
-
 	public String getMessage() {
 		return message;
 	}
-
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
 }

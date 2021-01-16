@@ -3,7 +3,7 @@ package fr.airpure.main.services;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import fr.airpure.main.dto.RegisterDtoRequest;
+import fr.airpure.main.dto.request.RegisterDtoRequest;
 import fr.airpure.main.entities.RoleUtilisateur;
 import fr.airpure.main.entities.Utilisateur;
 import fr.airpure.main.enums.ERole;

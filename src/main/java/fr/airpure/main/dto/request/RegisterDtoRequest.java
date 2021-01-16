@@ -1,4 +1,4 @@
-package fr.airpure.main.dto;
+package fr.airpure.main.dto.request;
 
 public class RegisterDtoRequest {
 	private String nom;

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import fr.airpure.main.dto.request.DtoNotificationRequest;
-import fr.airpure.main.dto.response.DtoNotificationResponse;
+import fr.airpure.main.dto.response.NotificationDtoResponse;
 import fr.airpure.main.entities.Departement;
 import fr.airpure.main.entities.Utilisateur;
 import fr.airpure.main.entities.echange.Notification;
@@ -28,11 +28,11 @@ public class NotificationManager {
 	}
 
 
-	public DtoNotificationResponse send(DtoNotificationRequest dtoNotificationRequest) throws NotFoundException {
+	public NotificationDtoResponse send(DtoNotificationRequest dtoNotificationRequest) throws NotFoundException {
 		Departement departement = this.departementService.findByNom(dtoNotificationRequest.getNomDepartement());
 		List<Utilisateur> allUtilisateurs = this.utilisateurService.getAllUtilisateurs();
 		//Notification notification = new Notification(dtoNotificationRequest.getMessage(), allUtilisateurs, departement);
-		return new DtoNotificationResponse("Notification envoyée avec succès.");
+		return new NotificationDtoResponse("Notification envoyée avec succès.");
 	}
 
 }

@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import fr.airpure.main.entities.Commune;
+import fr.airpure.main.exceptions.CommuneIntrouvableException;
 import fr.airpure.main.exceptions.echange.NotFoundException;
 import fr.airpure.main.repositories.CommuneRepository;
 
@@ -22,12 +24,12 @@ public class CommuneService {
 		this.communeRepository = communeRepository;
 	}
 	
-	public Commune findByCodeInsee(String codeInsee) throws NotFoundException {
+	public Commune findByCodeInsee(String codeInsee) throws CommuneIntrouvableException {
 		Optional<Commune> commune = this.communeRepository.findByCodeInseeCommune(codeInsee);
 		if(commune.isPresent()) {
 			return commune.get();
 		} else {
-			throw new NotFoundException();
+			throw new CommuneIntrouvableException("La commune dont le code INSEE est" + codeInsee + " est introuvable en BDD");
 		}
 	}
 	
@@ -39,5 +41,14 @@ public class CommuneService {
 		return this.communeRepository.getTop50Population();
 	}
 	
+	public Commune getById(int idCommune) throws CommuneIntrouvableException{
+		Optional<Commune> commune = this.communeRepository.findById(idCommune);
+		if(commune.isPresent()) {
+			return commune.get();
+		} else {
+			throw new CommuneIntrouvableException("La commune dont l'ID est" + idCommune + " est introuvable en BDD");
+		}
+	}
 
 }
+
