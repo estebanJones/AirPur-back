@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.airpure.main.dto.response.CommuneDtoResponse;
 import fr.airpure.main.entities.Commune;
 import fr.airpure.main.exceptions.CommuneIntrouvableException;
 import fr.airpure.main.services.CommuneService;
@@ -32,8 +33,9 @@ public class CommuneController {
 	public ResponseEntity<?> getCommuneById (@RequestParam int idCommune) throws CommuneIntrouvableException {
 		
 		Commune communeRecherche = this.communeService.getById(idCommune);
+		CommuneDtoResponse dtoCommune = new CommuneDtoResponse(communeRecherche);
 		
-		return ResponseEntity.ok(communeRecherche);		
+		return ResponseEntity.ok(dtoCommune);	
 	}
 	
 
@@ -48,7 +50,9 @@ public class CommuneController {
 		
 		Commune communeRecherche = this.communeService.findByCodeInsee(codeInseeCommune);
 		
-		return ResponseEntity.ok(communeRecherche);		
+		CommuneDtoResponse dtoCommune = new CommuneDtoResponse(communeRecherche);
+		
+		return ResponseEntity.ok(dtoCommune);		
 	}
 	
 	

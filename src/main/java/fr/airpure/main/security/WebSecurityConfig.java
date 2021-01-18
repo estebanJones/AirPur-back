@@ -84,8 +84,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					// Pour tester mes requétes
 					.antMatchers("/api/messages")
 					.permitAll()
+					
+					//Test controller Commune
+					.antMatchers("/commune/**")
+					.permitAll()
+					
 					.anyRequest()
 					.authenticated()
+					//
+					
+			
 				.and()
 
 				// génération d'un formulaire de login

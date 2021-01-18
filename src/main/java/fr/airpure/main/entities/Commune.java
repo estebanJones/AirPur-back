@@ -81,7 +81,6 @@ public class Commune extends Entite {
 		this.populationTotaleCommune = populationTotaleCommune;
 		this.Longitude = Longitude;
 		this.Latitude = Latitude;
-
 	}
 		
 	
@@ -173,6 +172,31 @@ public class Commune extends Entite {
 	
 	public Set<Favoris> getFavoris() {
 		return favoris;
+	}
+
+
+	public Set<Station> getStations() {
+		return stations;
+	}
+
+
+	public void setStations(Set<Station> stations) {
+		this.stations = stations;
+	}
+
+
+	public Set<MeteoIndicateur> getMeteoIndicateurs() {
+		return meteoIndicateurs;
+	}
+
+
+	public void setMeteoIndicateurs(Set<MeteoIndicateur> meteoIndicateurs) {
+		this.meteoIndicateurs = meteoIndicateurs;
+	}
+
+
+	public void setPopulationTotaleCommune(Integer populationTotaleCommune) {
+		this.populationTotaleCommune = populationTotaleCommune;
 	}
 
 
