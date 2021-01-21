@@ -28,7 +28,7 @@ public class NotificationManager {
 	}
 
 	public NotificationDtoResponse send(DtoNotificationRequest dtoNotificationRequest) throws NotFoundException {
-		Departement departement = this.departementService.findByNom(dtoNotificationRequest.getNomDepartement());
+		Departement departement = this.departementService.findByNom(dtoNotificationRequest.getCodeDepartement());
 		List<Utilisateur> allUtilisateurs = this.utilisateurService.getAllUtilisateurs();
 		//Notification notification = new Notification(dtoNotificationRequest.getMessage(), allUtilisateurs, departement);
 		return new NotificationDtoResponse("Notification envoyée avec succès.");

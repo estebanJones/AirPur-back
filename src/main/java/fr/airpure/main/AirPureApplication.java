@@ -86,8 +86,7 @@ public class AirPureApplication {
 		 
 		this.initDataController.initData();	
 		this.apiController.autoExtractPollution();
-		
-		//this.apiController.autoExtractMeteo();
+		this.apiController.autoExtractMeteo();
 		};
 
 	}

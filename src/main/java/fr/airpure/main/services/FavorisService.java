@@ -70,7 +70,7 @@ public class FavorisService {
 	/*
 	 * Methode de recupération de la liste des Favoris
 	 */
-	public List<Favoris> getAllFavoris() {
+	public List<Favoris> getMesFavoris() {
 		return favorisRepository.findAll();
 	}
 	

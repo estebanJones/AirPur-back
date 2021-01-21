@@ -17,16 +17,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import fr.airpure.main.dto.request.FavorisDtoRequest;
 import fr.airpure.main.dto.response.FavorisDtoResponse;
-import fr.airpure.main.entities.Commune;
+import fr.airpure.main.entities.Favoris;
+import fr.airpure.main.exceptions.FavorisNotFoundException;
+import fr.airpure.main.services.FavorisService;
 
-import fr.airpure.main.dto.FavorisDto;
-import fr.airpure.main.dto.ResponseFavorisDto;
 
-
-@RequestMapping("accueil")
+@RequestMapping("favoris")
 @RestController
 @CrossOrigin
 public class FavorisController {
@@ -37,39 +35,34 @@ public class FavorisController {
 		this.favorisService = favorisService;
 	}
 	
-	@PostMapping("/ajoutfavoris")
+	@PostMapping("create")
 	public ResponseEntity<?> favoris (@RequestBody FavorisDtoRequest favorisDto, BindingResult requestValid) {
-
 		if (!requestValid.hasErrors()) {
-
-			this.favorisService.saveFavoris(commune1,meteo1, polluant1, dateDebut,dateDebut,dateFin);
-		
-			this.favorisService.saveFavoris(favorisDto.getCommune(),favorisDto.getAir(),favorisDto.getMeteo(), favorisDto.getChoixDateDebut(), favorisDto.getChoixDateFin());
+			this.favorisService.createAndSaveFavoris(favorisDto.getCommuneId(), favorisDto.getUtilisateurId(),favorisDto.getMeteo(), favorisDto.getAir(), favorisDto.getChoixDateDebut(),favorisDto.getChoixDateFin());
 			return ResponseEntity.ok(new FavorisDtoResponse("Favoris bien ajouté"));
 		}
 		else {
-
 			return ResponseEntity.badRequest().body("Mauvaise Requete");
 		}
 	}
 
 	@GetMapping("/mesFavoris")
-	public List<Favoris> getMesFavoris() {
-		return favorisService.getFavoris();
+	public List<Favoris> getListeFavoris() {
+		return favorisService.getMesFavoris();
 	}
 
-	@GetMapping("/{id}")
-	public Favoris getFavoris(@PathVariable("id") Integer id) throws FavorisNotFoundException {
+	@GetMapping("{id}")
+	public Favoris getUnFavoris(@PathVariable("id") Integer id) throws FavorisNotFoundException {
 		return this.favorisService.getFavoris(id);
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("delete/{id}")
 	public void deleteMonFavoris(@PathVariable("id") Integer id) {
 		this.favorisService.deleteFavoris(id);
 		;
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("update/{id}")
 	public Favoris updateMaListeFavoris(@PathVariable("id") Integer id, @RequestBody Favoris favoris) {
 		return this.favorisService.updateListeFavoris(id, favoris);
 	}
