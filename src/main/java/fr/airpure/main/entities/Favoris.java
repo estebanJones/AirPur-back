@@ -40,6 +40,18 @@ public class Favoris {
 	}
 
 	
+	public Favoris(Commune commune, Utilisateur utilisateur, boolean meteo, boolean air, LocalDateTime choixDateDebut,
+			LocalDateTime choixDateFin) {
+		super();
+		this.commune = commune;
+		this.utilisateur = utilisateur;
+		this.meteo = meteo;
+		this.air = air;
+		this.choixDateDebut = choixDateDebut;
+		this.choixDateFin = choixDateFin;
+	}
+
+
 	// GETTERS & SETTERS
 	public Integer getId() {
 		return id;

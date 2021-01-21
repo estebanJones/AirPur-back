@@ -50,12 +50,9 @@ public class InitialDataManager {
 
 
 	
-	public void insertBaseDataForTest() {
-		
+	public void insertBaseDataForTest() {		
 		//RoleUtilisateur rolesUtilisateur = new RoleUtilisateur(userAdmin, ROLE_UTILISATEUR);
-		
-		/*
-		 * Utilisateur userAdmin = new Utilisateur(1, "nomAdmin", "prenomAdmin", "Admin", "mail@admin.com", "adminPwd", null );
+		Utilisateur userAdmin = new Utilisateur(1, "nomAdmin", "prenomAdmin", "Admin", "mail@admin.com", "adminPwd", null );
 		RoleUtilisateur roleAdmin = new RoleUtilisateur(userAdmin, ERole.ROLE_ADMINISTRATEUR);
 		Set<RoleUtilisateur> setRolesAdmin = new HashSet<RoleUtilisateur>();
 		setRolesAdmin.add(roleAdmin);
@@ -66,8 +63,7 @@ public class InitialDataManager {
 		this.inscriptionService.assignationRoleUtilisateur(userLambda1);
 		
 		Utilisateur userLambda2 = new Utilisateur(1, "nomLamba2", "prenomLamba2", "Lamba2", "mail@Lamba2.com", "Lambda2Pwd", null);
-		this.inscriptionService.assignationRoleUtilisateur(userLambda2); */
-		
+		this.inscriptionService.assignationRoleUtilisateur(userLambda2); 
 	}
 	
 }

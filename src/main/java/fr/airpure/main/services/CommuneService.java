@@ -68,13 +68,8 @@ public class CommuneService {
 	}
 	
 	public Commune getById(int idCommune) throws CommuneIntrouvableException{
-		
 		Optional<Commune> commune = this.communeRepository.findById(idCommune);
-		
 		if(commune.isPresent()) {
-			
-			
-			
 			return commune.get();
 		} else {
 			throw new CommuneIntrouvableException("La commune dont l'ID est" + idCommune + " est introuvable en BDD");
@@ -90,30 +85,29 @@ public class CommuneService {
 	 * @param communeParam
 	 * @return un Objet commune avec toutes les informations de la BDD lié à elle
 	 */
-	public Commune complementInfosCommune(Commune communeParam) {
-		
-		Commune fullCommune = communeParam;
-		
-		//Ajout des stations
-		List<Station> listeStationCommune = this.stationRepository.findByCommuneId(communeParam.getId());
-		for ( Station s : listeStationCommune ) {
-			fullCommune.getStations().add(s);
-		}
-		
-		//Ajout des indicateurs météos
-		List<MeteoIndicateur> listeRelevesMeteoCommune = this.meteoRepository.findByCommuneId(communeParam.getId());
-		for ( MeteoIndicateur m : listeRelevesMeteoCommune) {
-			fullCommune.getMeteoIndicateurs().add(m);
-		}
-		
-		
-		//Ajout des favoris
-		List<Favoris> listeFavorisCommune = this.favorisRepository.findByCommuneId(communeParam.getId());
-		for ( Favoris f : listeFavorisCommune ) {
-			fullCommune.getFavoris().add(f);
-		}
-		
-		return fullCommune;
-	}
+//	public Commune complementInfosCommune(Commune communeParam) {
+//		Commune fullCommune = communeParam;
+//		
+//		//Ajout des stations
+//		List<Station> listeStationCommune = this.stationRepository.findByCommuneId(communeParam.getId());
+//		for ( Station s : listeStationCommune ) {
+//			fullCommune.getStations().add(s);
+//		}
+//		
+//		//Ajout des indicateurs météos
+//		List<MeteoIndicateur> listeRelevesMeteoCommune = this.meteoRepository.findByCommuneId(communeParam.getId());
+//		for ( MeteoIndicateur m : listeRelevesMeteoCommune) {
+//			fullCommune.getMeteoIndicateurs().add(m);
+//		}
+//		
+//		
+//		//Ajout des favoris
+//		List<Favoris> listeFavorisCommune = this.favorisRepository.findByCommuneId(communeParam.getId());
+//		for ( Favoris f : listeFavorisCommune ) {
+//			fullCommune.getFavoris().add(f);
+//		}
+//		
+//		return fullCommune;
+//	}
 }
 
