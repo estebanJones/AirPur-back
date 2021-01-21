@@ -84,17 +84,24 @@ public class ExtractAtmoApiManager {
 				// JE CONVERTIS LES DATE
 				LocalDateTime dateDebutFinale = this.parseAndConverte(m.getProperties().getDateDebut());
 				LocalDateTime dateFinFinale = this.parseAndConverte(m.getProperties().getDateFin());
-				// CREATION STATION
+				// CREATION STATION		
 				Station station = this.stationService.creer(m);
 				// JOINTURE STATION COMMUNE
 				station.setCommune(commune);
+				
+				Station stationInDatabase = new Station();
+				
 				//PERSIST STATION
-				Station stationDataBase = this.stationService.save(station);
+				if ( !this.stationService.checkExistenceStationBDD(station.getNom()) ) {
+					stationInDatabase = this.stationService.save(station);
+				} else {
+					stationInDatabase = this.stationService.getStationByNom(station.getNom()).get();
+				}
 				//LOG.info("Station créée et persistées");
 				// CREATION POLLUANT
 				Polluant polluant = this.polluantService.creer(m, dateDebutFinale, dateFinFinale);
 				// JOINTURE POLLUANT STATION
-				polluant.setStation(stationDataBase);
+				polluant.setStation(stationInDatabase);
 				// PERSIST POLLUANT
 				this.polluantService.save(polluant);
 				LOG.info(polluant.toString());

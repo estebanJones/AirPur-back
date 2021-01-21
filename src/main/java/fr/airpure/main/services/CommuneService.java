@@ -25,6 +25,7 @@ import fr.airpure.main.repositories.StationRepository;
 @Service
 public class CommuneService {
 	
+	@Autowired
 	private CommuneRepository communeRepository;
 	
 	@Autowired
@@ -36,8 +37,8 @@ public class CommuneService {
 	@Autowired
 	private FavorisRepository favorisRepository;
 
-	public CommuneService(CommuneRepository communeRepository) {
-		this.communeRepository = communeRepository;
+	public CommuneService() {
+		
 	}
 	
 	/**
@@ -49,8 +50,8 @@ public class CommuneService {
 	public Commune findByCodeInsee(String codeInsee) throws CommuneIntrouvableException {
 		Optional<Commune> commune = this.communeRepository.findByCodeInseeCommune(codeInsee);
 		if(commune.isPresent()) {
-			Commune communeComplete = this.complementInfosCommune(commune.get());
-			return communeComplete;
+			//Commune communeComplete = this.complementInfosCommune(commune.get());
+			return commune.get();
 		} else {
 			throw new CommuneIntrouvableException("La commune dont le code INSEE est" + codeInsee + " est introuvable en BDD");
 		}

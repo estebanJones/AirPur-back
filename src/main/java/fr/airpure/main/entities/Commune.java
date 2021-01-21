@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -57,7 +58,7 @@ public class Commune extends Entite {
 	@OneToMany(mappedBy = "commune")
 	Set<Station> stations = new HashSet<>();
 	
-	@OneToMany(mappedBy = "commune")
+	@OneToMany(mappedBy = "commune", fetch = FetchType.EAGER )
 	Set<MeteoIndicateur> meteoIndicateurs = new HashSet<>();
 	/**  coordonées à récupérés  */
 	private double Longitude;
