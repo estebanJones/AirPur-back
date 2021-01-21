@@ -60,10 +60,11 @@ public class Commune extends Entite {
 	
 	@OneToMany(mappedBy = "commune", fetch = FetchType.EAGER )
 	Set<MeteoIndicateur> meteoIndicateurs = new HashSet<>();
-	/**  coordonées à récupérés  */
-	private double Longitude;
 	
-	private double Latitude;
+	/**  coordonées à récupérés  */
+	private double longitude;
+	
+	private double latitude;
 
 	
 	// CONSTRUCTEUR **************************************************************************************
@@ -80,8 +81,8 @@ public class Commune extends Entite {
 		this.nomCommune = nomCommune;
 		this.codeInseeCommune = codeInseeCommune;
 		this.populationTotaleCommune = populationTotaleCommune;
-		this.Longitude = Longitude;
-		this.Latitude = Latitude;
+		this.longitude = Longitude;
+		this.latitude = Latitude;
 	}
 		
 	
@@ -207,22 +208,22 @@ public class Commune extends Entite {
 
 
 	public double getLongitude() {
-		return Longitude;
+		return longitude;
 	}
 
 
 	public void setLongitude(double longitude) {
-		Longitude = longitude;
+		longitude = longitude;
 	}
 
 
 	public double getLatitude() {
-		return Latitude;
+		return latitude;
 	}
 
 
 	public void setLatitude(double latitude) {
-		Latitude = latitude;
+		latitude = latitude;
 	}
 
 	

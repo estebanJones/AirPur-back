@@ -13,6 +13,7 @@ import fr.airpure.main.entities.Region;
  * The Interface CommuneRepository.
  */
 public interface CommuneRepository extends JpaRepository<Commune, Integer>{
+	
 	Optional<Commune> findByCodeInseeCommune(String codeInsee);
 	
 	@Query(nativeQuery = true, value = 

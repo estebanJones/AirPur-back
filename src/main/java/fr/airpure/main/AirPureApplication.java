@@ -1,7 +1,20 @@
 package fr.airpure.main;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
 import javax.transaction.Transactional;
 
+import org.apache.ibatis.jdbc.ScriptRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,6 +22,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.support.EncodedResource;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
@@ -24,8 +40,6 @@ import fr.airpure.main.managers.ExtractMeteoApiManager;
 
 import fr.airpure.main.repositories.CommuneRepository;
 
-
-
 /**
  * The Class AirPureApplication.
  */
@@ -34,19 +48,18 @@ import fr.airpure.main.repositories.CommuneRepository;
 @Transactional
 @EnableScheduling
 public class AirPureApplication {
-	
+
 	@Autowired
 	ApiExtractController apiController;
-	
+
 	@Autowired
 	InitialDataController initDataController;
-	
+
 	@Autowired
 	private CommuneRepository repo;
-	
+
 	public AirPureApplication() {
 	}
-	
 
 	/**
 	 * The main method.
@@ -80,17 +93,41 @@ public class AirPureApplication {
 	@Bean
 	public CommandLineRunner run() throws Exception {
 		return args -> {
-		/**
-		 * A but de test, lance une extraction au lancement pour avoir des données Pollution et Météo à chaque Run
-		 */
-		 
-		this.initDataController.initData();	
-		this.apiController.autoExtractPollution();
-		this.apiController.autoExtractMeteo();
+
+			/* try {
+
+				/*String url = "jdbc:h2:mem:db" ; // database specific url.
+
+				Properties properties = new Properties();
+				properties.put("user", "root");
+				properties.put("password", "");
+
+				Connection connection = DriverManager.getConnection(url, properties);
+
+				File file = new File("C:\\Users\\Exost\\git\\AirPur-back\\src\\main\\resources\\myScript.sql");
+				if (!file.exists()) {
+					throw new FileNotFoundException("can't init mysql with sql script file is not exists");
+				}
+
+				FileSystemResource rc = new FileSystemResource(file);
+				EncodedResource encodeRes = new EncodedResource(rc, "GBK");
+				//ScriptUtils.executeSqlScript(connection, encodeRes);
+				// SqlLog.info("windchat init mysql database with sql-script finish");
+
+				// file.delete();
+			} catch (Exception e) {
+				throw new SQLException(e);
+			} */
+
+			/**
+			 * A but de test, lance une extraction au lancement pour avoir des données
+			 * Pollution et Météo à chaque Run
+			 */
+			// this.initDataController.initData();
+			this.apiController.autoExtractPollution();
+			this.apiController.autoExtractMeteo();
 		};
-
 	}
-
 
 	@Bean
 	public CorsFilter corsFilter() {
