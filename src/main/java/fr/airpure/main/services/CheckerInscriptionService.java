@@ -19,9 +19,7 @@ public class CheckerInscriptionService {
 	CheckerInscriptionService(UtilisateurRepository utilisateurRepository) {
 		this.utilisateurRepository = utilisateurRepository;
 	}
-	// @!TODO RENVOYER DES EXCEPTIONS A LA PLACE DE FALSE  
-	// NE PAS RENVOYER BOOLEAN MAIS VOID CAR EXCEPTION CANCEL
-	// APPELER LE TOUT DANS INSCRIPTION cONTROLLER
+
 	public boolean controleInscriptionProprietes(RegisterDtoRequest dtoRequest) {
 		return (this.checkIfDtoIsNotBlank(dtoRequest) && 
 				this.checkEmailSyntaxe(dtoRequest) 			&&
@@ -34,8 +32,8 @@ public class CheckerInscriptionService {
 
 	public boolean checkIfEmailExiste(RegisterDtoRequest dtoRequest) {
 		Optional<Utilisateur> utilisateur = this.utilisateurRepository.findByEmail(dtoRequest.getEmail());
-		if(!utilisateur.isPresent()) {
-			//!TODO terminer l'algo
+		if(utilisateur.isPresent()) {
+			return false;
 		}
 		return true;
 	}

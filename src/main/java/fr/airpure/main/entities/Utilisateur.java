@@ -10,9 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import fr.airpure.main.dto.request.RegisterDtoRequest;
 import fr.airpure.main.entities.echange.Notification;
+import fr.airpure.main.entities.echange.Suspension;
 
 
 @Entity
@@ -40,8 +42,15 @@ public class Utilisateur {
 	@OneToMany(mappedBy = "utilisateur")
 	private Set<Favoris> favoris;
 	
+	/**
+	 * Relation entre Utilisateur et Suspendre
+	 * un userAdmin peut suspendre plusieurs utilisateurs
+	 * un utilisateur ne peut etre suspendu qu'une fois
+	 */
+	@OneToOne
+	private Suspension suspendu;
 	
-	
+
 	public Utilisateur(Integer id, String nom, String prenom, String username, String email, String motDePasse,
 			Set<RoleUtilisateur> roles) {
 		this.id = id;
@@ -132,6 +141,38 @@ public class Utilisateur {
 
 	public void setRoles(Set<RoleUtilisateur> roles) {
 		this.roles = roles;
+	}
+
+	public Set<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(Set<Notification> notifications) {
+		this.notifications = notifications;
+	}
+
+	public Commune getCommune() {
+		return commune;
+	}
+
+	public void setCommune(Commune commune) {
+		this.commune = commune;
+	}
+
+	public Set<Favoris> getFavoris() {
+		return favoris;
+	}
+
+	public void setFavoris(Set<Favoris> favoris) {
+		this.favoris = favoris;
+	}
+
+	public Suspension getSuspendu() {
+		return suspendu;
+	}
+
+	public void setSuspendu(Suspension suspendu) {
+		this.suspendu = suspendu;
 	}
 	
 	

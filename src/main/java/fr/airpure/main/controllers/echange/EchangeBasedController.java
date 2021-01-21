@@ -47,7 +47,8 @@ public abstract class EchangeBasedController<T extends LongIdEntity, Service ext
 	public T find(@PathVariable Integer id) {
 		return service.findById(id);
 	}
-
+	
+	
 	@GetMapping
 	public List<T> findAll() {
 		return service.findAll();

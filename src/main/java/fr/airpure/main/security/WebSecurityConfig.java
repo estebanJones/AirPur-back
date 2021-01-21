@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -48,6 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * @param ds
 	 * @return
 	 */
+	// jpql trouver une autre solution avec jpa
 	@Bean
 	public UserDetailsService userDetailsService(DataSource ds) {
 		JdbcUserDetailsManager manager = new JdbcUserDetailsManager();
@@ -81,6 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.authorizeRequests() // toutes les requêtes doivent être authentifiées
 					.antMatchers("/accueil/**")
 					.permitAll()
+
 					// Pour tester mes requétes
 					.antMatchers("/api/messages")
 					.permitAll()
@@ -89,6 +92,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers("/commune/**")
 					.permitAll()
 					
+
+					// Debut testes Echanges
+					//.antMatchers(HttpMethod.GET, "/accueil/**").permitAll()
+					//.antMatchers(HttpMethod.GET, "/accueil/**").hasRole("ADMIN")
+					//.antMatchers(HttpMethod.GET, "/accueil/rubriques").hasAuthority("2")
+					//.antMatchers(HttpMethod.GET, "/accueil/rubriques").permitAll()
+
+
+					//Fin teste Echanges
+
 					.anyRequest()
 					.authenticated()
 					//
