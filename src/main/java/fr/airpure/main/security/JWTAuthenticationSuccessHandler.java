@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import fr.airpure.main.dto.UtilisateurConnexionDto;
+import fr.airpure.main.dto.response.UtilisateurConnexionDtoResponse;
 import fr.airpure.main.entities.Utilisateur;
 import fr.airpure.main.repositories.UtilisateurRepository;
 import io.jsonwebtoken.Jwts;
@@ -66,7 +66,7 @@ public class JWTAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucc
 				.orElseThrow(() -> new IllegalArgumentException("L'email ne correspond à aucun collegue"));
 
 		response.setContentType("application/json");
-		response.getWriter().write(mapper.writeValueAsString(new UtilisateurConnexionDto(utilisateur)));
+		response.getWriter().write(mapper.writeValueAsString(new UtilisateurConnexionDtoResponse(utilisateur)));
 
 		Map<String, Object> infosSupplementaireToken = new HashMap<>();
 		infosSupplementaireToken.put("roles", rolesList);

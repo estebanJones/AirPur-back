@@ -1,4 +1,4 @@
-package fr.airpure.main.dto;
+package fr.airpure.main.dto.response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import fr.airpure.main.entities.Utilisateur;
  * Structure modèlisant un collègue servant à communiquer avec l'extérieur (WEB
  * API).
  */
-public class UtilisateurConnexionDto {
+public class UtilisateurConnexionDtoResponse {
 	private Integer id;
 	private String email;
 	private String nom;
@@ -18,7 +18,7 @@ public class UtilisateurConnexionDto {
 	
 	private List<String> roles = new ArrayList<>();
 	
-	public UtilisateurConnexionDto(Utilisateur u) {
+	public UtilisateurConnexionDtoResponse(Utilisateur u) {
 		super();
 		this.id = u.getId();
 		this.email = u.getEmail();

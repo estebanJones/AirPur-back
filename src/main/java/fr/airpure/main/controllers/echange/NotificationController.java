@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.airpure.main.dto.request.DtoNotificationRequest;
-import fr.airpure.main.dto.response.DtoNotificationResponse;
+import fr.airpure.main.dto.response.NotificationDtoResponse;
 import fr.airpure.main.entities.echange.Notification;
 import fr.airpure.main.exceptions.RequeteErreurException;
 import fr.airpure.main.exceptions.echange.AlreadyExistsException;
@@ -62,7 +62,7 @@ public class NotificationController{
 	@PostMapping("send")
 	public ResponseEntity<?> sendNotification(@RequestBody DtoNotificationRequest dtoNotificationRequest, BindingResult resValid) throws AlreadyExistsException {
 		if(!resValid.hasErrors()) {
-			DtoNotificationResponse dtoNotificationResponse = null;
+			NotificationDtoResponse dtoNotificationResponse = null;
 			try {
 				dtoNotificationResponse = this.notificationManager.send(dtoNotificationRequest);
 			} catch (NotFoundException e) {

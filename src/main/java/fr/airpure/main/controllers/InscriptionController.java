@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.airpure.main.dto.RegisterDtoRequest;
-import fr.airpure.main.dto.RegisterDtoResponse;
+import fr.airpure.main.dto.request.RegisterDtoRequest;
+import fr.airpure.main.dto.response.RegisterDtoResponse;
 import fr.airpure.main.exceptions.FormulaireIncompletException;
 import fr.airpure.main.exceptions.RequeteErreurException;
 import fr.airpure.main.managers.InscriptionManager;

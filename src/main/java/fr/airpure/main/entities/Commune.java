@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -57,7 +58,7 @@ public class Commune extends Entite {
 	@OneToMany(mappedBy = "commune")
 	Set<Station> stations = new HashSet<>();
 	
-	@OneToMany(mappedBy = "commune")
+	@OneToMany(mappedBy = "commune", fetch = FetchType.EAGER )
 	Set<MeteoIndicateur> meteoIndicateurs = new HashSet<>();
 	/**  coordonées à récupérés  */
 	private double Longitude;
@@ -81,7 +82,6 @@ public class Commune extends Entite {
 		this.populationTotaleCommune = populationTotaleCommune;
 		this.Longitude = Longitude;
 		this.Latitude = Latitude;
-
 	}
 		
 	
@@ -173,6 +173,31 @@ public class Commune extends Entite {
 	
 	public Set<Favoris> getFavoris() {
 		return favoris;
+	}
+
+
+	public Set<Station> getStations() {
+		return stations;
+	}
+
+
+	public void setStations(Set<Station> stations) {
+		this.stations = stations;
+	}
+
+
+	public Set<MeteoIndicateur> getMeteoIndicateurs() {
+		return meteoIndicateurs;
+	}
+
+
+	public void setMeteoIndicateurs(Set<MeteoIndicateur> meteoIndicateurs) {
+		this.meteoIndicateurs = meteoIndicateurs;
+	}
+
+
+	public void setPopulationTotaleCommune(Integer populationTotaleCommune) {
+		this.populationTotaleCommune = populationTotaleCommune;
 	}
 
 

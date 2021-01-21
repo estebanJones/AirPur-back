@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "properties",
     "geometry"
 })
-public class Feature {
+public class Feature implements Comparable{
 
     @JsonProperty("type")
     private String type;
@@ -117,5 +117,17 @@ public class Feature {
         Feature rhs = ((Feature) other);
         return (((((this.geometry == rhs.geometry)||((this.geometry!= null)&&this.geometry.equals(rhs.geometry)))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.type == rhs.type)||((this.type!= null)&&this.type.equals(rhs.type))))&&((this.properties == rhs.properties)||((this.properties!= null)&&this.properties.equals(rhs.properties))));
     }
+    
+    public int compareTo(Feature comparestu) {
+        
+    	return this.getProperties().getDateFin().compareTo(comparestu.getProperties().getDateFin());
+    }
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 }

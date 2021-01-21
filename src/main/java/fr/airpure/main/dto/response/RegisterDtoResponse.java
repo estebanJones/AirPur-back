@@ -1,4 +1,4 @@
-package fr.airpure.main.dto;
+package fr.airpure.main.dto.response;
 
 public class RegisterDtoResponse {
 	private String message;

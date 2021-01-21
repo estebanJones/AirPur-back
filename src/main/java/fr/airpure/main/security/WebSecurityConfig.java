@@ -83,6 +83,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.authorizeRequests() // toutes les requêtes doivent être authentifiées
 					.antMatchers("/accueil/**")
 					.permitAll()
+
+					// Pour tester mes requétes
+					.antMatchers("/api/messages")
+					.permitAll()
+					
+					//Test controller Commune
+					.antMatchers("/commune/**")
+					.permitAll()
+					
+
 					// Debut testes Echanges
 					//.antMatchers(HttpMethod.GET, "/accueil/**").permitAll()
 					//.antMatchers(HttpMethod.GET, "/accueil/**").hasRole("ADMIN")
@@ -91,8 +101,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 					//Fin teste Echanges
+
 					.anyRequest()
 					.authenticated()
+					//
+					
+			
 				.and()
 
 				// génération d'un formulaire de login

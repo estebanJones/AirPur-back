@@ -81,6 +81,13 @@ public class Polluant extends Entite {
 		this.station = station;
 	}
 
+	@Override
+	public String toString() {
+		return "Polluant [nom=" + nom + ", valeur=" + valeur + ", unite=" + unite + ", dateDebut=" + dateDebut
+				+ ", dateFin=" + dateFin + ", station=" + station + "]";
+	}
+
+	
 	
 		
 }

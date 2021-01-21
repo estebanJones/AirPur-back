@@ -16,11 +16,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+
+import fr.airpure.main.dto.request.FavorisDtoRequest;
+import fr.airpure.main.dto.response.FavorisDtoResponse;
+import fr.airpure.main.entities.Commune;
+
 import fr.airpure.main.dto.FavorisDto;
 import fr.airpure.main.dto.ResponseFavorisDto;
-import fr.airpure.main.entities.Favoris;
-import fr.airpure.main.exceptions.FavorisNotFoundException;
-import fr.airpure.main.services.FavorisService;
+
 
 @RequestMapping("accueil")
 @RestController
@@ -32,14 +36,19 @@ public class FavorisController {
 		super();
 		this.favorisService = favorisService;
 	}
+	
+	@PostMapping("/ajoutfavoris")
+	public ResponseEntity<?> favoris (@RequestBody FavorisDtoRequest favorisDto, BindingResult requestValid) {
 
-	@PostMapping("/ajoutFavoris")
-	public ResponseEntity<?> favoris(@RequestBody FavorisDto favorisDto, BindingResult requestValid) {
 		if (!requestValid.hasErrors()) {
 
-			this.favorisService.createAndSaveFavoris(favorisDto.getCommuneId(), favorisDto.getUtilisateurId(),favorisDto.getMeteo(), favorisDto.getAir(), favorisDto.getChoixDateDebut(),favorisDto.getChoixDateFin());
-			return ResponseEntity.ok(new ResponseFavorisDto("Favoris bien ajouté"));
-		} else {
+			this.favorisService.saveFavoris(commune1,meteo1, polluant1, dateDebut,dateDebut,dateFin);
+		
+			this.favorisService.saveFavoris(favorisDto.getCommune(),favorisDto.getAir(),favorisDto.getMeteo(), favorisDto.getChoixDateDebut(), favorisDto.getChoixDateFin());
+			return ResponseEntity.ok(new FavorisDtoResponse("Favoris bien ajouté"));
+		}
+		else {
+
 			return ResponseEntity.badRequest().body("Mauvaise Requete");
 		}
 	}
