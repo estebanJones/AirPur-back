@@ -13,8 +13,5 @@ public class TestEntitesController {
 		super();
 	}
 	
-	@GetMapping
-	public void test() {
-		
-	}
+
 }

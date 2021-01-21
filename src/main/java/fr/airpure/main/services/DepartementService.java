@@ -27,4 +27,13 @@ public class DepartementService {
 			throw new NotFoundException();
 		}
 	}
+	
+	public Departement findByCodeDepartement(String codeDepartement) throws NotFoundException {
+		Optional<Departement> departement = this.departementRepository.findByCodeDepartement(codeDepartement);
+		if(departement.isPresent()) {
+			return departement.get();
+		} else {
+			throw new NotFoundException();
+		}
+	}
 }

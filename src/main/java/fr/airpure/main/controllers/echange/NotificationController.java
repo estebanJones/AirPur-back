@@ -29,7 +29,7 @@ import fr.airpure.main.managers.NotificationManager;
 import fr.airpure.main.repositories.echange.NotificationRepository;
 
 @RestController
-@RequestMapping("/api/notification")
+@RequestMapping("accueil")
 public class NotificationController{
 	@Autowired
 	private NotificationRepository notificationRepository;
@@ -40,7 +40,7 @@ public class NotificationController{
 	}
 	
 	@GetMapping
-	public List<Notification> getNotification() {
+	public List<Notification> getAllNotifications() {
 		return notificationRepository.findAll();
 	}
 	
@@ -58,8 +58,8 @@ public class NotificationController{
 	 * @throws AlreadyExistsException
 	 */
 	
-	@PreAuthorize("hasAuthority('NOTIF_CREATE')")
-	@PostMapping
+	//@PreAuthorize("hasAuthority('NOTIF_CREATE')")
+	@PostMapping("send")
 	public ResponseEntity<?> sendNotification(@RequestBody DtoNotificationRequest dtoNotificationRequest, BindingResult resValid) throws AlreadyExistsException {
 		if(!resValid.hasErrors()) {
 			DtoNotificationResponse dtoNotificationResponse = null;
@@ -77,14 +77,14 @@ public class NotificationController{
 	
 	
 	
-	@PreAuthorize("hasAuthority('NOTIF_DELETE')")
+	//@PreAuthorize("hasAuthority('NOTIF_DELETE')")
 	@DeleteMapping("/{id}")
 	public void deleteNotification(@PathVariable Integer id) throws NotFoundException {
 		Notification existingNotification = notificationRepository.findById(id).orElseThrow(() -> new NotFoundException());
 		notificationRepository.delete(existingNotification);
 	}
 	
-	@PreAuthorize("hasAuthority('NOTIF_UPDATE')")
+	//@PreAuthorize("hasAuthority('NOTIF_UPDATE')")
 	@PutMapping("/{id}")
 	public Notification updateNotification(@PathVariable Integer id, @RequestBody Notification notification) throws NotFoundException {
 		Optional<Notification> existingNotification = notificationRepository.findById(id);

@@ -2,11 +2,11 @@ package fr.airpure.main.dto.request;
 
 public class DtoNotificationRequest {
 	private String message;
-	private String nomDepartement;
+	private String codeDepartement;
 	
-	public DtoNotificationRequest(String message, String nomDepartement) {
+	public DtoNotificationRequest(String message, String codeDepartement) {
 		this.message = message;
-		this.nomDepartement = nomDepartement;
+		this.codeDepartement = codeDepartement;
 	}
 
 	public DtoNotificationRequest() {
@@ -21,11 +21,13 @@ public class DtoNotificationRequest {
 		this.message = message;
 	}
 
-	public String getNomDepartement() {
-		return nomDepartement;
+	public String getCodeDepartement() {
+		return codeDepartement;
 	}
 
-	public void setNomDepartement(String nomDepartement) {
-		this.nomDepartement = nomDepartement;
+	public void setCodeDepartement(String codeDepartement) {
+		this.codeDepartement = codeDepartement;
 	}
+
+
 }
