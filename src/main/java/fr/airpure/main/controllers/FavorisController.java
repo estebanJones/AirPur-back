@@ -45,12 +45,12 @@ public class FavorisController {
 	}
 
 	@GetMapping("/mesFavoris")
-	public List<Favoris> getMesFavoris() {
-		return favorisService.getFavoris();
+	public List<Favoris> getListeFavoris() {
+		return favorisService.getMesFavoris();
 	}
 
-	@GetMapping("/{id}")
-	public Favoris getFavoris(@PathVariable("id") Integer id) throws FavorisNotFoundException {
+	@GetMapping("mesFavoris/{id}")
+	public Favoris getUnFavoris(@PathVariable("id") Integer id) throws FavorisNotFoundException {
 		return this.favorisService.getFavoris(id);
 	}
 
