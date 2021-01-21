@@ -11,7 +11,7 @@ import fr.airpure.main.services.echange.RubriqueService;
 
 
 @RestController
-@RequestMapping("/api/rubriques")
+@RequestMapping("/accueil/rubriques")
 public class RubriqueController extends EchangeBasedController<Rubrique,RubriqueService>{
 
 }

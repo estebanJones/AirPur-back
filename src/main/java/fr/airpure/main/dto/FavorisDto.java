@@ -5,60 +5,84 @@ import java.time.LocalDateTime;
 import fr.airpure.main.entities.Commune;
 
 public class FavorisDto {
-	private Commune commune;
+	private Integer communeId;
 	private Boolean meteo;
 	private Boolean air;
-	private LocalDateTime ChoixDateDebut;
-	private LocalDateTime ChoixDateFin;
+	private LocalDateTime choixDateDebut;
+	private LocalDateTime choixDateFin;
+	private Integer utilisateurId;
 	
-	public FavorisDto(Commune commune, Boolean meteo, Boolean air, LocalDateTime choixDateDebut,
-			LocalDateTime choixDateFin) {
+
+	public FavorisDto(Integer communeId, Boolean meteo, Boolean air, LocalDateTime choixDateDebut,
+			LocalDateTime choixDateFin, Integer utilisateurId) {
 		super();
-		this.commune = commune;
+		this.communeId = communeId;
 		this.meteo = meteo;
 		this.air = air;
-		ChoixDateDebut = choixDateDebut;
-		ChoixDateFin = choixDateFin;
+		this.choixDateDebut = choixDateDebut;
+		this.choixDateFin = choixDateFin;
+		this.utilisateurId = utilisateurId;
 	}
 
-	public Commune getCommune() {
-		return commune;
+
+	public Integer getCommuneId() {
+		return communeId;
 	}
 
-	public void setCommune(Commune commune) {
-		this.commune = commune;
+
+	public void setCommuneId(Integer communeId) {
+		this.communeId = communeId;
 	}
+
 
 	public Boolean getMeteo() {
 		return meteo;
 	}
 
+
 	public void setMeteo(Boolean meteo) {
 		this.meteo = meteo;
 	}
+
 
 	public Boolean getAir() {
 		return air;
 	}
 
+
 	public void setAir(Boolean air) {
 		this.air = air;
 	}
 
+
 	public LocalDateTime getChoixDateDebut() {
-		return ChoixDateDebut;
+		return choixDateDebut;
 	}
+
 
 	public void setChoixDateDebut(LocalDateTime choixDateDebut) {
-		ChoixDateDebut = choixDateDebut;
+		this.choixDateDebut = choixDateDebut;
 	}
+
 
 	public LocalDateTime getChoixDateFin() {
-		return ChoixDateFin;
+		return choixDateFin;
 	}
 
+
 	public void setChoixDateFin(LocalDateTime choixDateFin) {
-		ChoixDateFin = choixDateFin;
+		this.choixDateFin = choixDateFin;
 	}
+
+
+	public Integer getUtilisateurId() {
+		return utilisateurId;
+	}
+
+
+	public void setUtilisateurId(Integer utilisateurId) {
+		this.utilisateurId = utilisateurId;
+	}
+
 
 }
