@@ -1,5 +1,6 @@
 package fr.airpure.main.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import fr.airpure.main.repositories.StationRepository;
 
 @Service
 public class StationService {
-	
 	@Autowired
 	private StationRepository stationRepository;
 	
@@ -19,6 +19,10 @@ public class StationService {
 	
 	}
 	
+	public List<Station> getStations() {
+		return this.stationRepository.findAll();
+		
+	}
 	public Station creer(Feature m) {
 		return new Station(m.getProperties().getNomStation(), 
 							String.valueOf(m.getProperties().getyL93()), 
