@@ -1,11 +1,13 @@
 package fr.airpure.main.services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+
 
 import fr.airpure.main.entities.Polluant;
 import fr.airpure.main.exceptions.echange.NotFoundException;
@@ -21,7 +23,7 @@ public class ParseReleveService {
 	public List<Polluant> parseReleve(Integer idStation) throws NotFoundException {
 		
 		List<Polluant> polluantsNonTrié = this.polluantService.getDernierPolluantByStation(idStation);
-		polluantsNonTrié.stream().sorted((p1, p2) -> p1.getNom().compareTo(p2.getNom()));
+	
        List<Polluant> listePolluantClean = new ArrayList<>();
 //
 //        boolean gazDejaAdd = false;
@@ -42,7 +44,7 @@ public class ParseReleveService {
 //            gazDejaAdd = false;
 //        }
 //
-        return listePolluantClean;
+        return polluantsNonTrié;
 	}
 	
 }

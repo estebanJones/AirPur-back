@@ -15,7 +15,7 @@ import fr.airpure.main.entities.Polluant;
 import fr.airpure.main.entities.Station;
 import fr.airpure.main.exceptions.echange.NotFoundException;
 import fr.airpure.main.managers.MarkerManager;
-import fr.airpure.main.services.ParseReleveService;
+import fr.airpure.main.services.PolluantService;
 import fr.airpure.main.services.StationService;
 
 @RestController
@@ -23,12 +23,12 @@ import fr.airpure.main.services.StationService;
 public class StationController {
 	private MarkerManager markerManager;
 	private StationService stationService;
-	private ParseReleveService parse;
+	private PolluantService polluantService;
 	
-	public StationController(MarkerManager markerManager, StationService stationService, ParseReleveService parse) {
+	public StationController(MarkerManager markerManager, StationService stationService, PolluantService polluantService) {
 		this.markerManager = markerManager;
 		this.stationService = stationService;
-		this.parse = parse;
+		this.polluantService = polluantService;
 	}
 	
 	@GetMapping("all")
@@ -48,8 +48,7 @@ public class StationController {
 	
 	@GetMapping("{idStation}")
 	public ResponseEntity<?> getStationReleves(@PathVariable Integer idStation) throws NotFoundException {
-		List<Polluant> polluants = this.parse.parseReleve(idStation);
-		System.out.println("POOOOOL " + polluants);
+		List<Polluant> polluants = this.polluantService.getDernierPolluantByStation(idStation);
 		List<DtoReleveStation> dto = polluants.stream().map(polluant -> new DtoReleveStation(polluant)).collect(Collectors.toList());
 		return ResponseEntity.ok(dto);
 	}
