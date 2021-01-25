@@ -11,6 +11,7 @@ public class DtoStation {
 	// COMMENT FAIRE POUR PASSER LES OBJETS
 	// JE PEUX FAIRE DES PROPRIETES STANDARD MAIS
 	// POLLUANT DEVRA FORCEMENT ETRE UN TABLEAU
+	private Integer id;
 	private String nom;
 	private Double latitude;
 	private Double longitude;
@@ -19,6 +20,7 @@ public class DtoStation {
 	
 	public DtoStation(Station station) {
 		super();
+		this.id = station.getId();
 		this.nom = station.getNom();
 		this.latitude = Double.parseDouble(station.getLatitude());
 		this.longitude = Double.parseDouble(station.getLongitude());
@@ -27,6 +29,14 @@ public class DtoStation {
 		station.getPolluant().forEach(polluant -> {
 			this.polluant.add(new DtoPolluant(polluant));
 		});
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNom() {
