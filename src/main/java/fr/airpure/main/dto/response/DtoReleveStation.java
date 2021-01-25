@@ -11,6 +11,8 @@ public class DtoReleveStation {
 	private LocalDateTime dateDebut;
 	private LocalDateTime dateFin;
 	private Integer stationId;
+	private String nomStation;
+	private String nomCommune;
 	
 	public DtoReleveStation(Polluant polluant) {
 		super();
@@ -20,6 +22,8 @@ public class DtoReleveStation {
 		this.dateDebut = polluant.getDateDebut();
 		this.dateFin = polluant.getDateFin();
 		this.stationId = polluant.getStation().getId();
+		this.nomStation = polluant.getStation().getNom();
+		this.nomCommune = polluant.getStation().getCommune().getNomCommune();
 	}
 
 	public String getNom() {
@@ -68,6 +72,22 @@ public class DtoReleveStation {
 
 	public void setStationId(Integer stationId) {
 		this.stationId = stationId;
+	}
+
+	public String getNomStation() {
+		return nomStation;
+	}
+
+	public void setNomStation(String nomStation) {
+		this.nomStation = nomStation;
+	}
+
+	public String getNomCommune() {
+		return nomCommune;
+	}
+
+	public void setNomCommune(String nomCommune) {
+		this.nomCommune = nomCommune;
 	}
 	
 	
