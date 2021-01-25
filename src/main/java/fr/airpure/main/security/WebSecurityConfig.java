@@ -39,9 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// Algorithme de hashage du mot de passe
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	public PasswordEncoder passwordEncoder() { 
 		return new BCryptPasswordEncoder();
 	}
+
 
 	/**
 	 * Configuration de l'identité.
@@ -102,8 +103,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 					//Fin teste Echanges
 
-					.anyRequest()
-					.authenticated()
+					//.anyRequest()
+					//.authenticated()
 					//
 					
 			

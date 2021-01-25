@@ -123,9 +123,10 @@ public class AirPureApplication {
 			 * A but de test, lance une extraction au lancement pour avoir des données
 			 * Pollution et Météo à chaque Run
 			 */
+			// à commenter si on a déja les données en base
 			// this.initDataController.initData();
-			this.apiController.autoExtractPollution();
-			this.apiController.autoExtractMeteo();
+			//this.apiController.autoExtractPollution();
+			//this.apiController.autoExtractMeteo();
 		};
 	}
 
