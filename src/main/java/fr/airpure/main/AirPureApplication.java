@@ -95,10 +95,9 @@ public class AirPureApplication {
 		 * A but de test, lance une extraction au lancement pour avoir des données Pollution et Météo à chaque Run
 		 */
 //		this.initDataController.initData();	
-//		this.apiController.autoExtractPollution();
-//		this.apiController.autoExtractMeteo();
+	this.apiController.autoExtractPollution();
+	this.apiController.autoExtractMeteo();
 
-<<<<<<< HEAD
 			/* try {
 
 				/*String url = "jdbc:h2:mem:db" ; // database specific url.
@@ -132,8 +131,6 @@ public class AirPureApplication {
 			// this.initDataController.initData();
 			//this.apiController.autoExtractPollution();
 			//this.apiController.autoExtractMeteo();
-=======
->>>>>>> 2f10849d8801bfbe463627969d334fc5c7f211af
 		};
 	}
 

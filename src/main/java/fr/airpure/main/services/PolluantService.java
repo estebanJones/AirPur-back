@@ -13,23 +13,59 @@ import fr.airpure.main.repositories.PolluantRepository;
 @Service
 public class PolluantService {
 	private PolluantRepository polluantRepository;
-	
+
 	public PolluantService(PolluantRepository polluantRepository) {
 		this.polluantRepository = polluantRepository;
 	}
-	
+
 	public Polluant creer(Feature m, LocalDateTime dateDebutAnalyse, LocalDateTime dateFinAnalyse) {
-		return new Polluant(m.getProperties().getNomPoll(),  
-				 m.getProperties().getValeur(),
-				 m.getProperties().getMetrique(), 
-				 dateDebutAnalyse, dateFinAnalyse);
+		return new Polluant(m.getProperties().getNomPoll(), m.getProperties().getValeur(),
+				m.getProperties().getMetrique(), dateDebutAnalyse, dateFinAnalyse);
 	}
-	
+
 	public Polluant save(Polluant polluant) {
 		return this.polluantRepository.save(polluant);
 	}
-	
+
 	public List<Polluant> getDernierPolluantByStation(Integer idStation) throws NotFoundException {
 		return this.polluantRepository.getDernierPolluantByStation(idStation);
+	}
+
+	/**
+	 * Permet de vérifier si un polluant polluantToCheck passé en param a déjà été
+	 * persisté en BDD
+	 * 
+	 * @param polluantToCheck
+	 * @return True si il existe, false sinon
+	 */
+	public boolean checkExistencePolluantBDD(Polluant polluantToCheck) {
+
+		// On recup les relevé de pollutions le splus récent de la stations du polluant
+		// en question
+		
+		List<Polluant> listeLastPolluants = this.polluantRepository
+				.getDernierPolluantByStation(polluantToCheck.getStation().getId());
+
+		boolean retour = false;
+		
+		if (listeLastPolluants.size() >= 0) {
+			// Pour chaque polluant, on regarde son nom, puis sa date
+			for (Polluant p : listeLastPolluants) {
+				if (p.getNom() == polluantToCheck.getNom()) {
+					System.out.println("nom ok");
+					if (p.getDateDebut() == polluantToCheck.getDateDebut()) {
+						System.out.println("Date Debut OK");
+						if (p.getDateFin() == polluantToCheck.getDateFin()) {
+							System.out.println("Date fin OK");
+							retour = false;
+						}
+					}
+				}
+			}
+		} else {
+			retour = false;
+		}
+		
+		return retour;
 	}
 }

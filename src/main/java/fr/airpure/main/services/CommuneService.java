@@ -75,6 +75,8 @@ public class CommuneService {
 			throw new CommuneIntrouvableException("La commune dont l'ID est" + idCommune + " est introuvable en BDD");
 		}
 	}
+	
+	
 
 	
 	/**

@@ -14,4 +14,5 @@ public interface PolluantRepository extends JpaRepository<Polluant, Integer> {
 			+ "FROM polluant WHERE polluant.station_id = :idStation GROUP BY polluant.station_id, polluant.nom",
 			nativeQuery= true)
 	public List<Polluant> getDernierPolluantByStation(@Param("idStation") Integer idStation);
+	
 }

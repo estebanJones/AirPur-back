@@ -68,8 +68,16 @@ public class ExtractMeteoApiManager {
 				// LE LIER A UNE COMMUNE
 				MeteoIndicateur meteoIndicateur = new MeteoIndicateur(date, forecast.getDirwind10m(), forecast.getRr10(), forecast.getTsoil2(), commune);
 				// LE PERSISTER EN BASE
-				this.meteoService.save(meteoIndicateur);
-				//LOG.info("FORECAST CREE ET PERSISTER");
+				
+				// EVITER LES DOUBLONS
+				if ( !this.meteoService.checkExistenceReleveMeteo(meteoIndicateur) ) {
+					this.meteoService.save(meteoIndicateur);
+					//LOG.info("FORECAST CREE ET PERSISTER");
+				} else {
+					LOG.info("MeteoIndicateur deja en BDD");
+				}
+				
+	
 			}
 		}
 	}
