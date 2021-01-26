@@ -75,7 +75,15 @@ public class CommuneService {
 			throw new CommuneIntrouvableException("La commune dont l'ID est" + idCommune + " est introuvable en BDD");
 		}
 	}
-
+	
+	public MeteoIndicateur getMeteoByCommune(Integer idCommune) throws NotFoundException{
+		Optional<MeteoIndicateur> meteoCommune = this.meteoRepository.findLastMeteoByCommune(idCommune);
+		if(meteoCommune.isPresent()) {
+			return meteoCommune.get();
+		} else {
+			throw new NotFoundException();
+		}
+	}
 	
 	/**
 	 * Passe par les repo concernés pour fournir à l'objet commune placé en param les informations suivantes :

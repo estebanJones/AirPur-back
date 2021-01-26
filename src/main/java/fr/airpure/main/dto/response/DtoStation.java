@@ -16,6 +16,7 @@ public class DtoStation {
 	private Double latitude;
 	private Double longitude;
 	private String nomCommune;
+	private Integer communeId;
 	private Set<DtoPolluant> polluant = new HashSet<>();
 	
 	public DtoStation(Station station) {
@@ -25,7 +26,7 @@ public class DtoStation {
 		this.latitude = Double.parseDouble(station.getLatitude());
 		this.longitude = Double.parseDouble(station.getLongitude());
 		this.nomCommune = station.getCommune().getNomCommune();
-		
+		this.communeId = station.getCommune().getId();
 		station.getPolluant().forEach(polluant -> {
 			this.polluant.add(new DtoPolluant(polluant));
 		});
@@ -69,6 +70,15 @@ public class DtoStation {
 
 	public void setNomCommune(String nomCommune) {
 		this.nomCommune = nomCommune;
+	}
+	
+	
+	public Integer getCommuneId() {
+		return communeId;
+	}
+
+	public void setCommuneId(Integer communeId) {
+		this.communeId = communeId;
 	}
 
 	public Set<DtoPolluant> getPolluant() {
