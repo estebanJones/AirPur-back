@@ -56,8 +56,10 @@ public class JWTAuthorizationFilter  extends OncePerRequestFilter {
 
                             Authentication authentication =  new UsernamePasswordAuthenticationToken(username, null, roles);
                             SecurityContextHolder.getContext().setAuthentication(authentication);
+                            
                         } catch (JwtException e) {
                             // En cas d'erreur de lecture du jeton, la requête n'est pas authentifiée et n'aura pas accès aux ressources sécurisées
+                        	
                             LOGGER.error("Erreur de lecture du jeton JWT", e);
                         }
                     });

@@ -103,10 +103,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 					//Fin teste Echanges
+					
+					// sample anonymous customization
+					
 
-					//.anyRequest()
-					//.authenticated()
-					//
+					.anyRequest()
+					.authenticated()
+
 					
 			
 				.and()
@@ -143,5 +146,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.headers()
 			.frameOptions()
 			.sameOrigin();
+		// Pour désactiver l'anonymous user
+			//.and()
+           //.anonymous().disable()
 	}
 }

@@ -3,11 +3,11 @@ package fr.airpure.main.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
 import fr.airpure.main.dto.request.RegisterDtoRequest;
-import fr.airpure.main.entities.Favoris;
 import fr.airpure.main.entities.Utilisateur;
 import fr.airpure.main.exceptions.UtilisateurNotFoundException;
 import fr.airpure.main.repositories.UtilisateurRepository;
@@ -15,9 +15,12 @@ import fr.airpure.main.repositories.UtilisateurRepository;
 @Service
 public class UtilisateurService {
 	private UtilisateurRepository utilisateurRepo;
+	private PasswordEncoder passwordEncoder;
 	
-	public UtilisateurService(UtilisateurRepository utilisateurRepo) {
+	
+	public UtilisateurService(UtilisateurRepository utilisateurRepo, PasswordEncoder passwordEncoder) {
 		this.utilisateurRepo = utilisateurRepo;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	/*
@@ -50,7 +53,7 @@ public class UtilisateurService {
 		Optional<Utilisateur> optionalUtilisateur = utilisateurRepo.findById(id);
 
 		if (!optionalUtilisateur.isPresent()) {
-			throw new UtilisateurNotFoundException("Favoris inexistant veuillé le créer...");
+			throw new UtilisateurNotFoundException("Utilisateur inexistant veuillé le créer...");
 		}
 		return optionalUtilisateur.get();
 	}
@@ -62,13 +65,35 @@ public class UtilisateurService {
 			this.utilisateurRepo.deleteById(id);			
 		}
 		
-		/*
-		 * Methode de mise à jour d'un utilisateur
-		 */
+	/*
+	 * Encode Mot de passe utilisateur	
+	 * 
+	 */
 		
-	public Utilisateur updateUtilisateur(Integer id, Utilisateur utilisateur) {
-			utilisateur.setId(id);
+	public void encodePassword(Utilisateur utilisateur) {
+		utilisateur.setMotDePasse(this.passwordEncoder.encode(utilisateur.getMotDePasse()));		
+	}
+	
+	/*
+	 * Methode de mise à jour d'un utilisateur
+	 * Encode le mot de passe passwordEncoder
+	 * Puis met à jour le mot de passe en BD
+	 * UpdateUtilisateur et Update je teste les deux
+	 */
+	
+	// Methode Update 1
+	public Utilisateur updateUtilisateur(Utilisateur utilisateur) {
+			this.encodePassword(utilisateur);
 			return this.utilisateurRepo.save(utilisateur);
-			
-		}
+	}
+	
+	//Methode Update 2
+	public Utilisateur update(Integer id, Utilisateur utilisateur) {
+		if (!utilisateurRepo.existsById(id)) {
+			throw new RuntimeException("Utilisateur n'existe pas en base");
+		}	
+		utilisateur.setId(id);
+		return this.utilisateurRepo.save(utilisateur);				
+	}	
+	
 }

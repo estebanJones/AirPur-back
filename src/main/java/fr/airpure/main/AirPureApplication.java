@@ -15,6 +15,7 @@ import java.util.Properties;
 import javax.transaction.Transactional;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -90,7 +91,7 @@ public class AirPureApplication {
 
 	@Bean
 	public CommandLineRunner run() throws Exception {
-		return args -> {
+		return null  ;
 		/**
 		 * A but de test, lance une extraction au lancement pour avoir des données Pollution et Météo à chaque Run
 		 */
@@ -98,7 +99,7 @@ public class AirPureApplication {
 //		this.apiController.autoExtractPollution();
 //		this.apiController.autoExtractMeteo();
 
-<<<<<<< HEAD
+
 			/* try {
 
 				/*String url = "jdbc:h2:mem:db" ; // database specific url.
@@ -132,9 +133,7 @@ public class AirPureApplication {
 			// this.initDataController.initData();
 			//this.apiController.autoExtractPollution();
 			//this.apiController.autoExtractMeteo();
-=======
->>>>>>> 2f10849d8801bfbe463627969d334fc5c7f211af
-		};
+
 	}
 
 	@Bean
@@ -151,5 +150,14 @@ public class AirPureApplication {
 		source.registerCorsConfiguration("/**", config);
 		return new CorsFilter(source);
 	}
+
+	/*
+	 * le Bean ModelMapper pour la conversion Entite-Dto
+	 */
+	@Bean
+	public ModelMapper modelMapper() {
+	    return new ModelMapper();
+	}
+	
 
 }

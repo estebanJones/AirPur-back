@@ -28,6 +28,7 @@ public class InscriptionManager {
 	
 	public RegisterDtoResponse inscription(RegisterDtoRequest dtoRequest) {
 		this.inscriptionService.encodePassword(dtoRequest);
+		
 		Utilisateur utilisateur = this.utilisateurService.creerUtilisateur(dtoRequest);
 		Utilisateur utilisateurDataBase = this.utilisateurService.persist(utilisateur);
 		RoleUtilisateur roleParDefaut = this.inscriptionService.assignationRoleUtilisateur(utilisateurDataBase);

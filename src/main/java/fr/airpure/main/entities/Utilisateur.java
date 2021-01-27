@@ -26,7 +26,6 @@ public class Utilisateur {
 	private String prenom;
 	private String username;
 	private String email;
-
 	private String motDePasse;
 	
 	@OneToMany(mappedBy = "utilisateur", cascade = CascadeType.PERSIST)
