@@ -48,7 +48,7 @@ public class FavorisController {
 		}
 	}
 
-	@GetMapping("liste/{idUtilisateur}")
+	@GetMapping("releves/liste/{idUtilisateur}")
 	public ResponseEntity<?> getListeFavoris(@PathVariable("idUtilisateur") Integer idUtilisateur) {
 		List<DtoFavoris> dtoFavoris = this.favorisService.getFavorisByUtilisateur(idUtilisateur);
 		return ResponseEntity.ok(dtoFavoris);
