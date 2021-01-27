@@ -46,6 +46,12 @@ public class ExtractAtmoApiManager {
 		this.restTemplate = restTemplate;
 	}
 	
+	
+	/**
+	 * Void lancant le processus d'extraction des données depuis l'API ATMOs
+	 * @param maListe
+	 * @throws CommuneIntrouvableException
+	 */
 	public void extract() throws CommuneIntrouvableException {
 			
 			long start = System.currentTimeMillis();
@@ -72,40 +78,53 @@ public class ExtractAtmoApiManager {
 			
 	}
 	
+	/**
+	 * Void permettant la persistance de la liste de Feature (entite venant de l'API ATMO désignant un relevé)  placé en param
+	 * @param maListe
+	 * @throws CommuneIntrouvableException
+	 */
 	public void extract(List<Feature> maListe) throws CommuneIntrouvableException {
 		for (Feature m : maListe) {
 			//LOG.info("Formattage des dates terminés");
 			try {
-				// POUR CHAQUE LIGNE JE CREAIS UN POLLUANT ET UNE STATION
-				// JE CHERCHE LA REGION PAR CODE INSEE DE LA COMMUNE TRAITEE
+		
 				// Region region = this.regionService.findByCodeInsee(String.valueOf(m.getProperties().getInseeCom()));
+				
 				String codeInsee = String.valueOf(m.getProperties().getInseeCom());
 				Commune commune = this.communeService.findByCodeInsee(codeInsee);
+				
 				// JE CONVERTIS LES DATE
 				LocalDateTime dateDebutFinale = this.parseAndConverte(m.getProperties().getDateDebut());
 				LocalDateTime dateFinFinale = this.parseAndConverte(m.getProperties().getDateFin());
+				
 				// CREATION STATION		
 				Station station = this.stationService.creer(m);
-				// JOINTURE STATION COMMUNE
 				station.setCommune(commune);
 				
 				Station stationInDatabase = new Station();
 				
-				//PERSIST STATION
-				if ( !this.stationService.checkExistenceStationBDD(station.getNom()) ) {
+				// EVITER LES DOUBLONS
+				if ( !this.stationService.checkExistenceStationBDD(station.getNom()) ) { 
 					stationInDatabase = this.stationService.save(station);
 				} else {
 					stationInDatabase = this.stationService.getStationByNom(station.getNom()).get();
 				}
 				//LOG.info("Station créée et persistées");
+				
 				// CREATION POLLUANT
 				Polluant polluant = this.polluantService.creer(m, dateDebutFinale, dateFinFinale);
 				// JOINTURE POLLUANT STATION
 				polluant.setStation(stationInDatabase);
-				// PERSIST POLLUANT
-				this.polluantService.save(polluant);
-				LOG.info(polluant.toString());
+				
+				// EVITER LES DOUBLONS 
+				if ( !this.polluantService.checkExistencePolluantBDD( polluant) ) {
+					this.polluantService.save(polluant);
+				//LOG.info(polluant.toString());
+				} else {
+					LOG.info("Polluant déjà persisté");
+				}
 				//LOG.info("Polluant créé et persistés");
+			
 			} catch (CommuneIntrouvableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

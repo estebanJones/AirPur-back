@@ -52,4 +52,8 @@ public class StationService {
 		System.out.println("pol " + stations);
 		
 	}
+	
+	public void deleteStation( Station toDelete ) {
+		this.stationRepository.delete(toDelete);
+	}
 }

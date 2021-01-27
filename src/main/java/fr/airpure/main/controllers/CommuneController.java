@@ -1,17 +1,20 @@
 package fr.airpure.main.controllers;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.airpure.main.dto.exceptions.DtoException;
 import fr.airpure.main.dto.response.CommuneDtoResponse;
+import fr.airpure.main.dto.response.DtoMeteoIndicateur;
 import fr.airpure.main.entities.Commune;
+import fr.airpure.main.entities.MeteoIndicateur;
 import fr.airpure.main.exceptions.CommuneIntrouvableException;
+import fr.airpure.main.exceptions.echange.NotFoundException;
 import fr.airpure.main.services.CommuneService;
 
 @RestController
@@ -31,10 +34,8 @@ public class CommuneController {
 	 */
 	@GetMapping("id")
 	public ResponseEntity<?> getCommuneById (@RequestParam int idCommune) throws CommuneIntrouvableException {
-		
 		Commune communeRecherche = this.communeService.getById(idCommune);
 		CommuneDtoResponse dtoCommune = new CommuneDtoResponse(communeRecherche);
-		
 		return ResponseEntity.ok(dtoCommune);	
 	}
 	
@@ -47,13 +48,20 @@ public class CommuneController {
 	 */
 	@GetMapping("insee")
 	public ResponseEntity<?> getCommuneByInsee (@RequestParam String codeInseeCommune) throws CommuneIntrouvableException {
-		
 		Commune communeRecherche = this.communeService.findByCodeInsee(codeInseeCommune);
-		
 		CommuneDtoResponse dtoCommune = new CommuneDtoResponse(communeRecherche);
-		
 		return ResponseEntity.ok(dtoCommune);		
 	}
 	
-	
+	@GetMapping("meteo/{idCommune}")
+	public ResponseEntity<?> getTodayMeteoByCommune(@PathVariable Integer idCommune) {
+		MeteoIndicateur meteoIndicateur;
+		try {
+			meteoIndicateur = this.communeService.getMeteoByCommune(idCommune);
+			DtoMeteoIndicateur dtoMeteo = new DtoMeteoIndicateur(meteoIndicateur);
+			return ResponseEntity.ok(dtoMeteo);
+		} catch (NotFoundException e) {
+			return ResponseEntity.badRequest().body(new DtoException(e.getMessage()));
+		}
+	}
 }

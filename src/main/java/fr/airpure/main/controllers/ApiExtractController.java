@@ -47,4 +47,6 @@ public class ApiExtractController {
 	
 		this.extractAtmoMeteoManager.extract();
 	}
+
+	
 }

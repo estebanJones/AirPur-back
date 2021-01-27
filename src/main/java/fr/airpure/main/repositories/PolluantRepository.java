@@ -1,6 +1,8 @@
 package fr.airpure.main.repositories;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,4 +16,7 @@ public interface PolluantRepository extends JpaRepository<Polluant, Integer> {
 			+ "FROM polluant WHERE polluant.station_id = :idStation GROUP BY polluant.station_id, polluant.nom",
 			nativeQuery= true)
 	public List<Polluant> getDernierPolluantByStation(@Param("idStation") Integer idStation);
+	
+	@Query(value= "SELECT * FROM Polluant p WHERE p.station_id= :idStation AND p.nom= :nom AND p.date_Debut= :dateDebut", nativeQuery= true)
+	public List<Polluant> findPolluantsByIdStationAndNomAndDateDebut(@Param("idStation") Integer idStation,@Param("nom") String nom, @Param("dateDebut") LocalDateTime dateDebut);
 }

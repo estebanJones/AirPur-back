@@ -5,12 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import fr.airpure.main.entities.Commune;
-import fr.airpure.main.entities.Favoris;
 import fr.airpure.main.entities.MeteoIndicateur;
-import fr.airpure.main.entities.Station;
 import fr.airpure.main.exceptions.CommuneIntrouvableException;
 import fr.airpure.main.exceptions.echange.NotFoundException;
 import fr.airpure.main.repositories.CommuneRepository;
@@ -73,6 +70,16 @@ public class CommuneService {
 			return commune.get();
 		} else {
 			throw new CommuneIntrouvableException("La commune dont l'ID est" + idCommune + " est introuvable en BDD");
+		}
+	}
+	
+
+	public MeteoIndicateur getMeteoByCommune(Integer idCommune) throws NotFoundException{
+		Optional<MeteoIndicateur> meteoCommune = this.meteoRepository.findLastMeteoByCommune(idCommune);
+		if(meteoCommune.isPresent()) {
+			return meteoCommune.get();
+		} else {
+			throw new NotFoundException();
 		}
 	}
 
