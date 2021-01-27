@@ -38,7 +38,7 @@ public class FavorisController {
 	@PostMapping("create")
 	public ResponseEntity<?> favoris (@RequestBody FavorisDtoRequest favorisDto, BindingResult requestValid) {
 		if (!requestValid.hasErrors()) {
-			this.favorisService.createAndSaveFavoris(favorisDto.getCommuneId(), favorisDto.getUtilisateurId(),favorisDto.getMeteo(), favorisDto.getAir(), favorisDto.getChoixDateDebut(),favorisDto.getChoixDateFin());
+			this.favorisService.createAndSaveFavoris(favorisDto.getCommuneId(), favorisDto.getUtilisateurId(), favorisDto.getMeteo(), favorisDto.getAir(), favorisDto.getChoixDateDebut(), favorisDto.getChoixDateFin());
 			return ResponseEntity.ok(new FavorisDtoResponse("Favoris bien ajouté"));
 		}
 		else {

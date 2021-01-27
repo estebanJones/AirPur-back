@@ -106,45 +106,6 @@ public class AirPureApplication {
 //	this.apiController.autoExtractPollution();
 		//this.apiController.autoExtractMeteo();
 
-			/* try {
-
-				/*String url = "jdbc:h2:mem:db" ; // database specific url.
-
-				Properties properties = new Properties();
-				properties.put("user", "root");
-				properties.put("password", "");
-
-				Connection connection = DriverManager.getConnection(url, properties);
-
-				File file = new File("C:\\Users\\Exost\\git\\AirPur-back\\src\\main\\resources\\myScript.sql");
-				if (!file.exists()) {
-					throw new FileNotFoundException("can't init mysql with sql script file is not exists");
-				}
-
-				FileSystemResource rc = new FileSystemResource(file);
-				EncodedResource encodeRes = new EncodedResource(rc, "GBK");
-				//ScriptUtils.executeSqlScript(connection, encodeRes);
-				// SqlLog.info("windchat init mysql database with sql-script finish");
-
-				// file.delete();
-			} catch (Exception e) {
-				throw new SQLException(e);
-			} */
-
-			/**
-			 * A but de test, lance une extraction au lancement pour avoir des données
-			 * Pollution et Météo à chaque Run
-			 */
-			// à commenter si on a déja les données en base
-			// this.initDataController.initData();
-			//this.apiController.autoExtractPollution();
-			//this.apiController.autoExtractMeteo();
-			
-			
-			//2021-01-23 00:00:00
-			//LocalDateTime local = LocalDateTime.of(2021,01, 23, 0, 0, 0);	
-			//List<Polluant> testPolluant = this.polluantService.getPolluantByIdStationAndNomAndDateDebut(1, "PM10", local);
-			//System.out.println( testPolluant.get(0).toString() );
 		};
 	}
 
