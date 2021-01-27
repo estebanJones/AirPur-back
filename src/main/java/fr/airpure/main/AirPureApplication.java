@@ -10,6 +10,9 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 
 import javax.transaction.Transactional;
@@ -33,12 +36,14 @@ import org.springframework.web.filter.CorsFilter;
 
 import fr.airpure.main.controllers.ApiExtractController;
 import fr.airpure.main.controllers.InitialDataController;
+import fr.airpure.main.entities.Polluant;
 import fr.airpure.main.managers.BaseDataManager;
 import fr.airpure.main.managers.ExtractAtmoApiManager;
 
 import fr.airpure.main.managers.ExtractMeteoApiManager;
 
 import fr.airpure.main.repositories.CommuneRepository;
+import fr.airpure.main.services.PolluantService;
 
 /**
  * The Class AirPureApplication.
@@ -54,6 +59,9 @@ public class AirPureApplication {
 
 	@Autowired
 	InitialDataController initDataController;
+	
+	@Autowired
+	PolluantService polluantService;
 
 
 	public AirPureApplication() {
@@ -95,8 +103,8 @@ public class AirPureApplication {
 		 * A but de test, lance une extraction au lancement pour avoir des données Pollution et Météo à chaque Run
 		 */
 //		this.initDataController.initData();	
-	this.apiController.autoExtractPollution();
-	this.apiController.autoExtractMeteo();
+//	this.apiController.autoExtractPollution();
+		//this.apiController.autoExtractMeteo();
 
 			/* try {
 
@@ -131,6 +139,12 @@ public class AirPureApplication {
 			// this.initDataController.initData();
 			//this.apiController.autoExtractPollution();
 			//this.apiController.autoExtractMeteo();
+			
+			
+			//2021-01-23 00:00:00
+			//LocalDateTime local = LocalDateTime.of(2021,01, 23, 0, 0, 0);	
+			//List<Polluant> testPolluant = this.polluantService.getPolluantByIdStationAndNomAndDateDebut(1, "PM10", local);
+			//System.out.println( testPolluant.get(0).toString() );
 		};
 	}
 

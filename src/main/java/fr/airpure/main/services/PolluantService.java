@@ -2,6 +2,7 @@ package fr.airpure.main.services;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,14 @@ public class PolluantService {
 	public List<Polluant> getDernierPolluantByStation(Integer idStation) throws NotFoundException {
 		return this.polluantRepository.getDernierPolluantByStation(idStation);
 	}
+	
+	public void deletePolluant(Polluant toDelete) {
+		this.polluantRepository.delete(toDelete);
+	}
+	
+	public List<Polluant> getPolluantByIdStationAndNomAndDateDebut(Integer idStation, String nom, LocalDateTime dateDebut){
+		return this.polluantRepository.findPolluantsByIdStationAndNomAndDateDebut(idStation, nom, dateDebut);
+	}
 
 	/**
 	 * Permet de vérifier si un polluant polluantToCheck passé en param a déjà été
@@ -40,11 +49,20 @@ public class PolluantService {
 	 */
 	public boolean checkExistencePolluantBDD(Polluant polluantToCheck) {
 
+		List<Polluant> polluantsSimilaireExistants = this.getPolluantByIdStationAndNomAndDateDebut(polluantToCheck.getStation().getId(), 
+																									polluantToCheck.getNom(),
+																									polluantToCheck.getDateDebut() );
+		
+		if ( polluantsSimilaireExistants.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+		
 		// On recup les relevé de pollutions le splus récent de la stations du polluant
 		// en question
 		
-		List<Polluant> listeLastPolluants = this.polluantRepository
-				.getDernierPolluantByStation(polluantToCheck.getStation().getId());
+		/*List<Polluant> listeLastPolluants = this.polluantRepository.getDernierPolluantByStation(polluantToCheck.getStation().getId());
 
 		boolean retour = false;
 		
@@ -66,6 +84,6 @@ public class PolluantService {
 			retour = false;
 		}
 		
-		return retour;
+		return retour; */
 	}
 }

@@ -13,5 +13,5 @@ public interface MeteoRepository extends JpaRepository<MeteoIndicateur, Integer>
 
 	public List<MeteoIndicateur> findByCommuneId (int idCommune);
 	
-	public Optional<MeteoIndicateur> findByDateAndCommuneId(LocalDateTime localDateTime, int idCommune);
+	public List<MeteoIndicateur> findByDateAndCommuneId(LocalDateTime localDateTime, int idCommune);
 }
