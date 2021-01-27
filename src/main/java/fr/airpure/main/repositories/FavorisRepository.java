@@ -9,4 +9,7 @@ import fr.airpure.main.entities.Favoris;
 public interface FavorisRepository extends JpaRepository<Favoris, Integer>{
 
 	public List<Favoris> findByCommuneId(int communeId);
+	public List<Favoris> findByUtilisateurId(int utilisateurId);
+	
+	
 }
