@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.airpure.main.dto.DtoTest;
-import fr.airpure.main.dto.UtilisateurDto;
 import fr.airpure.main.exceptions.UtilisateurNotFoundException;
 
 @RestController
