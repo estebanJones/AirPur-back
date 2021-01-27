@@ -52,4 +52,11 @@ public class StationController {
 		List<DtoReleveStation> dto = polluants.stream().map(polluant -> new DtoReleveStation(polluant)).collect(Collectors.toList());
 		return ResponseEntity.ok(dto);
 	}
+	
+//	@GetMapping("{idStation}")
+//	public ResponseEntity<?> getHistoriquePolluant(@PathVariable Integer idStation) throws NotFoundException {
+//		List<Polluant> polluants = this.polluantService.getDernierPolluantByStation(idStation);
+//		List<DtoReleveStation> dto = polluants.stream().map(polluant -> new DtoReleveStation(polluant)).collect(Collectors.toList());
+//		return ResponseEntity.ok(dto);
+//	}
 }
