@@ -1,5 +1,9 @@
 package fr.airpure.main.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,13 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.airpure.main.dto.exceptions.DtoException;
 import fr.airpure.main.dto.response.CommuneDtoResponse;
-import fr.airpure.main.dto.response.DtoMeteoIndicateur;
 import fr.airpure.main.entities.Commune;
-import fr.airpure.main.entities.MeteoIndicateur;
 import fr.airpure.main.exceptions.CommuneIntrouvableException;
-import fr.airpure.main.exceptions.echange.NotFoundException;
 import fr.airpure.main.services.CommuneService;
 
 @RestController
@@ -32,11 +32,26 @@ public class CommuneController {
 	 * @return La commune dont l'ID est renseignée en param encapsulé dans une ResponseEntity
 	 * @throws CommuneIntrouvableException
 	 */
-	@GetMapping("id")
-	public ResponseEntity<?> getCommuneById (@RequestParam int idCommune) throws CommuneIntrouvableException {
+	@GetMapping("{idCommune}")
+	public ResponseEntity<?> getCommuneById (@PathVariable int idCommune) throws CommuneIntrouvableException {
+		
 		Commune communeRecherche = this.communeService.getById(idCommune);
 		CommuneDtoResponse dtoCommune = new CommuneDtoResponse(communeRecherche);
+		
 		return ResponseEntity.ok(dtoCommune);	
+	}
+	
+	@GetMapping("like/{nomAlike}")
+public ResponseEntity<?> getCommuneByNom (@PathVariable String nomAlike) throws CommuneIntrouvableException {
+		
+		List<Commune> listeCommunesAlike = this.communeService.getByNomAlike(nomAlike);
+		List<CommuneDtoResponse> listeDtoCommune = new ArrayList<CommuneDtoResponse>();
+		
+		for ( Commune c : listeCommunesAlike ) {
+			listeDtoCommune.add(new CommuneDtoResponse(c));
+		}
+		
+		return ResponseEntity.ok(listeDtoCommune);
 	}
 	
 
@@ -48,20 +63,13 @@ public class CommuneController {
 	 */
 	@GetMapping("insee")
 	public ResponseEntity<?> getCommuneByInsee (@RequestParam String codeInseeCommune) throws CommuneIntrouvableException {
+		
 		Commune communeRecherche = this.communeService.findByCodeInsee(codeInseeCommune);
+		
 		CommuneDtoResponse dtoCommune = new CommuneDtoResponse(communeRecherche);
+		
 		return ResponseEntity.ok(dtoCommune);		
 	}
 	
-	@GetMapping("meteo/{idCommune}")
-	public ResponseEntity<?> getTodayMeteoByCommune(@PathVariable Integer idCommune) {
-		MeteoIndicateur meteoIndicateur;
-		try {
-			meteoIndicateur = this.communeService.getMeteoByCommune(idCommune);
-			DtoMeteoIndicateur dtoMeteo = new DtoMeteoIndicateur(meteoIndicateur);
-			return ResponseEntity.ok(dtoMeteo);
-		} catch (NotFoundException e) {
-			return ResponseEntity.badRequest().body(new DtoException(e.getMessage()));
-		}
-	}
+	
 }

@@ -2,6 +2,7 @@ package fr.airpure.main;
 
 import javax.transaction.Transactional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +18,8 @@ import org.springframework.web.filter.CorsFilter;
 
 import fr.airpure.main.controllers.ApiExtractController;
 import fr.airpure.main.controllers.InitialDataController;
+import fr.airpure.main.repositories.CommuneRepository;
+import fr.airpure.main.services.CommuneService;
 import fr.airpure.main.services.PolluantService;
 
 /**
@@ -34,10 +37,6 @@ public class AirPureApplication {
 	@Autowired
 	InitialDataController initDataController;
 	
-	@Autowired
-	PolluantService polluantService;
-
-
 	public AirPureApplication() {
 	}
 
@@ -76,9 +75,11 @@ public class AirPureApplication {
 		/**
 		 * A but de test, lance une extraction au lancement pour avoir des données Pollution et Météo à chaque Run
 		 */
-//		this.initDataController.initData();	
+		//this.initDataController.initData();
 //		this.apiController.autoExtractPollution();
 		//this.apiController.autoExtractMeteo();
+			
+//		System.out.println(this.communeService.getByNomAlike("Mont").get(0));
 
 		};
 	}
@@ -96,6 +97,11 @@ public class AirPureApplication {
 		config.addAllowedMethod("DELETE");
 		source.registerCorsConfiguration("/**", config);
 		return new CorsFilter(source);
+	}
+	
+	@Bean
+	public ModelMapper modelMapper() {
+	    return new ModelMapper();
 	}
 
 }
