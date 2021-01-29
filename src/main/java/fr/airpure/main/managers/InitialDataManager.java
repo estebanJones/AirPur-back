@@ -66,4 +66,8 @@ public class InitialDataManager {
 		this.inscriptionService.assignationRoleUtilisateur(userLambda2); 
 	}
 	
+	public void cleanInitialBDD() {
+		this.communeService.deleteAllCommunesHorsOccitanie();
+	}
+	
 }

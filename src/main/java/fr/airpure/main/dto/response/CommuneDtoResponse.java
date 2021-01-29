@@ -40,7 +40,7 @@ public class CommuneDtoResponse {
 		
 		this.idDepartementCommune = communeParam.getDepartementCommune().getId();
 		
-		System.out.println("Size Liste Station = " + communeParam.getStations().size());
+		//System.out.println("Size Liste Station = " + communeParam.getStations().size());
 		for (Station s : communeParam.getStations() ) {
 			this.listeIdStationsCommune.add(s.getId());
 		}
