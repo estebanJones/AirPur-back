@@ -3,6 +3,7 @@ package fr.airpure.main.controllers;
  * Controller pour la gestions des favoris
  */
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.airpure.main.dto.request.FavorisDtoRequest;
+import fr.airpure.main.dto.response.DtoFavoris;
 import fr.airpure.main.dto.response.FavorisDtoResponse;
 import fr.airpure.main.entities.Favoris;
 import fr.airpure.main.exceptions.FavorisNotFoundException;
@@ -46,9 +48,10 @@ public class FavorisController {
 		}
 	}
 
-	@GetMapping("/mesFavoris")
-	public List<Favoris> getListeFavoris() {
-		return favorisService.getMesFavoris();
+	@GetMapping("releves/liste/{idUtilisateur}")
+	public ResponseEntity<?> getListeFavoris(@PathVariable("idUtilisateur") Integer idUtilisateur) {
+		List<DtoFavoris> dtoFavoris = this.favorisService.getFavorisByUtilisateur(idUtilisateur);
+		return ResponseEntity.ok(dtoFavoris);
 	}
 
 	@GetMapping("{id}")
