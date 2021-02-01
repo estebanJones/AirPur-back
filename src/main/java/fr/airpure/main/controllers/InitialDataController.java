@@ -12,7 +12,12 @@ public class InitialDataController {
 	@Autowired
 	InitialDataManager initDataManager;
 	
+	/**
+	 * A pour vocation de faciliter/raccourir l'initialisation de la BDD lors du lancement
+	 * - Ici, supprime toutes les communes en dehors de l'Occitanie
+	 */
 	public void initData() {	
-		this.initDataManager.insertBaseDataForTest();
+		//this.initDataManager.insertBaseDataForTest();
+		this.initDataManager.cleanInitialBDD();
 	}
 }

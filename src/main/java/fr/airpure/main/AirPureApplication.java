@@ -20,6 +20,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import fr.airpure.main.controllers.ApiExtractController;
 import fr.airpure.main.controllers.InitialDataController;
+import fr.airpure.main.repositories.CommuneRepository;
+import fr.airpure.main.services.CommuneService;
 import fr.airpure.main.services.PolluantService;
 
 /**
@@ -37,10 +39,6 @@ public class AirPureApplication {
 	@Autowired
 	InitialDataController initDataController;
 	
-	@Autowired
-	PolluantService polluantService;
-
-
 	public AirPureApplication() {
 	}
 
@@ -79,9 +77,11 @@ public class AirPureApplication {
 		/**
 		 * A but de test, lance une extraction au lancement pour avoir des données Pollution et Météo à chaque Run
 		 */
-//		this.initDataController.initData();	
+		//this.initDataController.initData();
 //		this.apiController.autoExtractPollution();
 		//this.apiController.autoExtractMeteo();
+			
+//		System.out.println(this.communeService.getByNomAlike("Mont").get(0));
 
 		};
 	}

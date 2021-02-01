@@ -5,9 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import fr.airpure.main.entities.Commune;
+import fr.airpure.main.entities.Favoris;
 import fr.airpure.main.entities.MeteoIndicateur;
+import fr.airpure.main.entities.Station;
 import fr.airpure.main.exceptions.CommuneIntrouvableException;
 import fr.airpure.main.exceptions.echange.NotFoundException;
 import fr.airpure.main.repositories.CommuneRepository;
@@ -73,15 +76,24 @@ public class CommuneService {
 		}
 	}
 	
-
-	public MeteoIndicateur getMeteoByCommune(Integer idCommune) throws NotFoundException{
-		Optional<MeteoIndicateur> meteoCommune = this.meteoRepository.findLastMeteoByCommune(idCommune);
-		if(meteoCommune.isPresent()) {
-			return meteoCommune.get();
-		} else {
-			throw new NotFoundException();
-		}
+	public List<Commune> getByNomAlike(String nomAlike){
+		
+		String nomAlikeSQL = nomAlike.concat("%");	
+		return this.communeRepository.findByNomAlike(nomAlikeSQL);
+		
 	}
+	
+	/**
+	 * Void à utiliser en boot après le script SQL INSEE pour ne conserver que les communes d'Occitanie en BDD
+	 */
+	public void deleteAllCommunesHorsOccitanie() {
+		this.communeRepository.deleteAllHorsOccitanie();
+	}
+	
+	//public Commune getByNom(String nomCommune ) {
+		
+	//}
+	
 
 	
 	/**
