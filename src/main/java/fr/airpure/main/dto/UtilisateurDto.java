@@ -8,7 +8,7 @@ public class UtilisateurDto {
 	private String email;
 	private String nom;
 	private String prenom;
-	
+
 	public UtilisateurDto() {
 		super();
 		this.id = id;
@@ -48,7 +48,5 @@ public class UtilisateurDto {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	
-	
-	
+
 }

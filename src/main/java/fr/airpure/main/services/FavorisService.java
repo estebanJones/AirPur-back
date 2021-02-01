@@ -82,9 +82,17 @@ public class FavorisService {
 	/*
 	 * Methode de recupération de la liste des Favoris
 	 */
-	public List<Favoris> getMesFavoris() {
+	public List<Favoris> getTousLesFavoris() {
 		return favorisRepository.findAll();
 	}
+	/*
+	 * Methode de recupération de la liste des Favoris de l'utilisateur
+	 */
+/*	
+	public List<Favoris> getMesFavoris() {
+		return favorisRepository.findByUtilisateurId(utilisateurId);
+	}	
+	*/
 	
 	/*
 	 * Methode de recupération de la liste des Favoris

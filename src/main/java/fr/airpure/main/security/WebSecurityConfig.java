@@ -101,7 +101,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					
 
 					// Debut testes Echanges
-					//.antMatchers(HttpMethod.GET, "/accueil/**").permitAll()
+					.antMatchers(HttpMethod.GET, "/accueil/**").permitAll()
 					//.antMatchers(HttpMethod.GET, "/accueil/**").hasRole("ADMIN")
 					//.antMatchers(HttpMethod.GET, "/accueil/rubriques").hasAuthority("2")
 					//.antMatchers(HttpMethod.GET, "/accueil/rubriques").permitAll()

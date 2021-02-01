@@ -2,14 +2,19 @@
 package fr.airpure.main.entities.echange;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import fr.airpure.main.entities.Utilisateur;
 
 @Entity
-public class Suspension extends LongIdEntity{
-	
+public class Suspension {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private Boolean definitif;
 	
 	// il faut une date de debut et une date de fin dans ce cas
@@ -55,6 +60,14 @@ public class Suspension extends LongIdEntity{
 
 	public void setUserSuspendu(Utilisateur userSuspendu) {
 		this.userSuspendu = userSuspendu;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

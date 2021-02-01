@@ -15,14 +15,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import fr.airpure.main.controllers.ApiExtractController;
 import fr.airpure.main.controllers.InitialDataController;
-import fr.airpure.main.repositories.CommuneRepository;
-import fr.airpure.main.services.CommuneService;
-import fr.airpure.main.services.PolluantService;
+
 
 /**
  * The Class AirPureApplication.
@@ -79,9 +75,7 @@ public class AirPureApplication {
 		 */
 		//this.initDataController.initData();
 //		this.apiController.autoExtractPollution();
-//		this.apiController.autoExtractMeteo();
-			
-//		System.out.println(this.communeService.getByNomAlike("Mont").get(0));
+	//this.apiController.autoExtractMeteo();
 
 		};
 	}
