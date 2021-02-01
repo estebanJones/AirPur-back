@@ -31,7 +31,6 @@ public class NotificationManager {
 		Departement departement = this.departementService.findByCodeDepartement(dtoNotificationRequest.getCodeDepartement());
 		List<Utilisateur> allUtilisateurs = this.utilisateurService.getAllUtilisateurs();
 		allUtilisateurs.forEach(utilisateur -> {
-			
 			this.notificationService.save(new Notification(dtoNotificationRequest.getMessage(), utilisateur, departement, false));
 		});
 		return new NotificationDtoResponse("Notification envoyée avec succès.");

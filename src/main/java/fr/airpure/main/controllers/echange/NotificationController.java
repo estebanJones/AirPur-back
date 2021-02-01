@@ -5,6 +5,7 @@ package fr.airpure.main.controllers.echange;
  */
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.airpure.main.dto.request.DtoNotificationRequest;
+import fr.airpure.main.dto.response.NotificationDtoListe;
 import fr.airpure.main.dto.response.NotificationDtoResponse;
 import fr.airpure.main.entities.echange.Notification;
 import fr.airpure.main.exceptions.RequeteErreurException;
@@ -44,11 +46,11 @@ public class NotificationController{
 		return notificationRepository.findAll();
 	}
 	
-	@GetMapping("/{id}")
-	public Notification getNotification(@PathVariable Integer id) {
-		if(notificationRepository.findById(id).isPresent())
-			return notificationRepository.findById(id).get();
-		else return null;
+	@GetMapping("liste/{utilisateurId}")
+	public ResponseEntity<?> getNotificationByUser(@PathVariable Integer utilisateurId) {
+		List<Notification> notifications = this.notificationRepository.findByUtilisateurId(utilisateurId);
+		List<NotificationDtoListe> dtoNotification = notifications.stream().map(notification -> new NotificationDtoListe(notification)).collect(Collectors.toList());
+		return ResponseEntity.ok(dtoNotification);
 	}
 	
 	/**

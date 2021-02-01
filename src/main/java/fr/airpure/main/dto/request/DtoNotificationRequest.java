@@ -3,7 +3,7 @@ package fr.airpure.main.dto.request;
 public class DtoNotificationRequest {
 	private String message;
 	private String codeDepartement;
-	
+
 	public DtoNotificationRequest(String message, String codeDepartement) {
 		this.message = message;
 		this.codeDepartement = codeDepartement;

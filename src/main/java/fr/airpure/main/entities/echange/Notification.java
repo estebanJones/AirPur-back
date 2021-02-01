@@ -31,7 +31,7 @@ public class Notification {
 	@JoinColumn(name = "utilisateur_id")
 	private Utilisateur utilisateur;
 	
-	private Boolean readed;
+	private boolean read;
 	public Notification() {
 		this.dateCreation = LocalDate.now();
 	}
@@ -43,7 +43,7 @@ public class Notification {
 		this.dateCreation = LocalDate.now();
 		this.utilisateur = utilisateur;
 		this.departement = departement;
-		this.readed = readed;
+		this.read = read;
 	}
 
 	public String getMessage() {
@@ -90,11 +90,11 @@ public class Notification {
 		this.utilisateur = utilisateur;
 	}
 
-	public Boolean getReaded() {
-		return readed;
+	public boolean isRead() {
+		return read;
 	}
 
-	public void setReaded(Boolean readed) {
-		this.readed = readed;
+	public void setRead(boolean read) {
+		this.read = read;
 	}
 }
