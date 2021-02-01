@@ -20,5 +20,12 @@ public interface PolluantRepository extends JpaRepository<Polluant, Integer> {
 	@Query(value= "SELECT * FROM Polluant p WHERE p.station_id= :idStation AND p.nom= :nom AND p.date_Debut= :dateDebut", nativeQuery= true)
 	public List<Polluant> findPolluantsByIdStationAndNomAndDateDebut(@Param("idStation") Integer idStation,@Param("nom") String nom, @Param("dateDebut") LocalDateTime dateDebut);
 
+
+	public List<Polluant> findByDateDebutGreaterThanEqualAndDateFinLessThanEqualAndStationCommuneId(LocalDateTime dateDebut, LocalDateTime dateFin, Integer communeId);
+
+	@Query(value= "SELECT * FROM Polluant p where p.station_id = :idStation AND p.date_debut >= :dateDebut AND p.date_fin <= :dateFin", nativeQuery = true)
+	public List<Polluant> findByIdAndDateDebutAndDateFin (@Param("idStation") Integer idStation, @Param("dateDebut") LocalDateTime dateDebut, @Param("dateFin") LocalDateTime dateFin);
+  
 	public List<Polluant> findByDateDebutGreaterThanEqualAndDateFinLessThanEqualAndStationCommuneIdOrderByDateDebutDesc(LocalDateTime dateDebut, LocalDateTime dateFin, Integer communeId);
+
 }

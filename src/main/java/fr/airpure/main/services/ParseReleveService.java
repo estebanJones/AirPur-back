@@ -22,7 +22,7 @@ public class ParseReleveService {
 	
 	public List<Polluant> parseReleve(Integer idStation) throws NotFoundException {
 		
-		List<Polluant> polluantsNonTrié = this.polluantService.getDernierPolluantByStation(idStation);
+		List<Polluant> polluantsNonTrié = this.polluantService.getDernierPolluantsByStation(idStation);
 	
        List<Polluant> listePolluantClean = new ArrayList<>();
 //

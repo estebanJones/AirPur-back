@@ -102,7 +102,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					
 					.antMatchers("/meteo/**")
 					.permitAll()
-					
+								
 
 					// Debut testes Echanges
 					.antMatchers(HttpMethod.GET, "/accueil/**").permitAll()
