@@ -1,4 +1,4 @@
-cpackage fr.airpure.main.dto.response;
+package fr.airpure.main.dto.response;
 
 import java.time.LocalDateTime;
 
