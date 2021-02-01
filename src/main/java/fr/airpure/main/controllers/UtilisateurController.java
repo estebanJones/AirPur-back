@@ -33,8 +33,8 @@ import fr.airpure.main.services.UtilisateurService;
 public class UtilisateurController {
 	@Autowired
 	private UtilisateurService utilisateurService;
-	@Autowired
-	private UtilisateurRepository utilisateurRepository;
+	//@Autowired
+	//private UtilisateurRepository utilisateurRepository;
 	@Autowired
 	private ModelMapper modelMapper;
 	

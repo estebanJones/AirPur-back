@@ -3,7 +3,7 @@ package fr.airpure.main.services;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,41 +14,37 @@ import fr.airpure.main.repositories.UtilisateurRepository;
 
 @Service
 public class UtilisateurService {
+	@Autowired
 	private UtilisateurRepository utilisateurRepo;
+	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	
-	public UtilisateurService(UtilisateurRepository utilisateurRepo, PasswordEncoder passwordEncoder) {
-		this.utilisateurRepo = utilisateurRepo;
-		this.passwordEncoder = passwordEncoder;
-	}
-	
+
 	/*
-	 * Methode de recuperation de la liste  d'utilisateur
+	 * Methode de recuperation de la liste d'utilisateur
 	 */
-	
+
 	public List<Utilisateur> getAllUtilisateurs() {
 		return this.utilisateurRepo.findAll();
-		
+
 	}
-	
+
 	/*
-	 * Methode de creation  d' un utilisateur
+	 * Methode de creation d' un utilisateur
 	 */
 	public Utilisateur creerUtilisateur(RegisterDtoRequest dtoRequest) {
 		return new Utilisateur(dtoRequest);
-		
+
 	}
 
 	public Utilisateur persist(Utilisateur utilisateur) {
 		return this.utilisateurRepo.save(utilisateur);
-		
+
 	}
-	
+
 	/*
 	 * Methode de recuperation d'un utilisateur
 	 */
-	
+
 	public Utilisateur getUtilisateur(Integer id) throws UtilisateurNotFoundException {
 		Optional<Utilisateur> optionalUtilisateur = utilisateurRepo.findById(id);
 
@@ -61,39 +57,38 @@ public class UtilisateurService {
 	/*
 	 * Methode de supression d'un utilisateur
 	 */
-		public void deleteUtilisateur(Integer id) {
-			this.utilisateurRepo.deleteById(id);			
-		}
-		
+	public void deleteUtilisateur(Integer id) {
+		this.utilisateurRepo.deleteById(id);
+	}
+
 	/*
-	 * Encode Mot de passe utilisateur	
+	 * Encode Mot de passe utilisateur
 	 * 
 	 */
-		
+
 	public void encodePassword(Utilisateur utilisateur) {
-		utilisateur.setMotDePasse(this.passwordEncoder.encode(utilisateur.getMotDePasse()));		
+		utilisateur.setMotDePasse(this.passwordEncoder.encode(utilisateur.getMotDePasse()));
 	}
-	
+
 	/*
-	 * Methode de mise à jour d'un utilisateur
-	 * Encode le mot de passe passwordEncoder
-	 * Puis met à jour le mot de passe en BD
-	 * UpdateUtilisateur et Update je teste les deux
+	 * Methode de mise à jour d'un utilisateur Encode le mot de passe
+	 * passwordEncoder Puis met à jour le mot de passe en BD UpdateUtilisateur et
+	 * Update je teste les deux
 	 */
-	
+
 	// Methode Update 1
 	public Utilisateur updateUtilisateur(Utilisateur utilisateur) {
-			this.encodePassword(utilisateur);
-			return this.utilisateurRepo.save(utilisateur);
+		this.encodePassword(utilisateur);
+		return this.utilisateurRepo.save(utilisateur);
 	}
-	
-	//Methode Update 2
+
+	// Methode Update 2
 	public Utilisateur update(Integer id, Utilisateur utilisateur) {
 		if (!utilisateurRepo.existsById(id)) {
 			throw new RuntimeException("Utilisateur n'existe pas en base");
-		}	
+		}
 		utilisateur.setId(id);
-		return this.utilisateurRepo.save(utilisateur);				
-	}	
-	
+		return this.utilisateurRepo.save(utilisateur);
+	}
+
 }
