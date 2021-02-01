@@ -48,7 +48,7 @@ public class FavorisController {
 
 	@GetMapping("/mesFavoris")
 	public List<Favoris> getListeFavoris() {
-		return favorisService.getMesFavoris();
+		return favorisService.getTousLesFavoris();
 	}
 
 	@GetMapping("{id}")
