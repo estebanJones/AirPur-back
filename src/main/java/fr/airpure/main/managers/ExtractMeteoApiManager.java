@@ -66,7 +66,7 @@ public class ExtractMeteoApiManager {
 				LocalDateTime date = this.parseAndConverteForcaste(forecast.getDatetime());
 				// CREER UN OBJET METEO INDICATEUR
 				// LE LIER A UNE COMMUNE
-				MeteoIndicateur meteoIndicateur = new MeteoIndicateur(date, forecast.getDirwind10m(), forecast.getRr10(), forecast.getTsoil2(), commune);
+				MeteoIndicateur meteoIndicateur = new MeteoIndicateur(date, forecast.getWind10m(), forecast.getRr10(), forecast.getTsoil2(), commune);
 				// LE PERSISTER EN BASE
 				
 				// EVITER LES DOUBLONS

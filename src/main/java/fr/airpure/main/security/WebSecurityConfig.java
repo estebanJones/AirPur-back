@@ -96,6 +96,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers("/commune/**")
 					.permitAll()
 					
+					.antMatchers("/meteo/**")
+					.permitAll()
+					
 
 					// Debut testes Echanges
 					//.antMatchers(HttpMethod.GET, "/accueil/**").permitAll()

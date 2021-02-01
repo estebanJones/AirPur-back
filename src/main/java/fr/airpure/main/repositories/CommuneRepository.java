@@ -22,7 +22,7 @@ public interface CommuneRepository extends JpaRepository<Commune, Integer>{
 	List<Commune> getTop50Population();
 	
 	@Query( nativeQuery = true, value =
-			"SELECT * FROM commune c  WHERE c.nom_commune LIKE :nomAlike")
+			"SELECT * FROM commune c  WHERE c.nom_commune LIKE :nomAlike LIMIT 5")
 	List<Commune> findByNomAlike(@Param("nomAlike") String nomAlike);
 	
 	@Query( nativeQuery = true, value = "DELETE FROM commune WHERE commune.id IN ( SELECT c.id FROM commune c JOIN departement d ON d.id = c.departement JOIN region r ON r.id = d.region_id WHERE r.id != 5")
