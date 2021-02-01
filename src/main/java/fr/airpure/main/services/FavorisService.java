@@ -103,8 +103,8 @@ public class FavorisService {
 		List<DtoFavoris> dtoFavoris = new ArrayList<>();
 		// pour chaque favoris je prends les infos liées
 		favoris.forEach(f -> {
-			List<MeteoIndicateur> meteoIndicateurs = this.meteoRepository.findByDateBetweenAndCommuneId(f.getChoixDateDebut(), f.getChoixDateFin(), f.getCommune().getId());
-			List<Polluant> polluants = this.polluantRepository.findByDateDebutGreaterThanEqualAndDateFinLessThanEqualAndStationCommuneId(f.getChoixDateDebut(), f.getChoixDateFin(), f.getCommune().getId());
+			List<MeteoIndicateur> meteoIndicateurs = this.meteoRepository.findByDateBetweenAndCommuneIdOrderByDateDesc(f.getChoixDateDebut(), f.getChoixDateFin(), f.getCommune().getId());
+			List<Polluant> polluants = this.polluantRepository.findByDateDebutGreaterThanEqualAndDateFinLessThanEqualAndStationCommuneIdOrderByDateDebutDesc(f.getChoixDateDebut(), f.getChoixDateFin(), f.getCommune().getId());
 			dtoFavoris.add(new DtoFavoris(meteoIndicateurs, polluants));
 		});
 		// JE DOIS PRENDRE LES METEO ET LES POLLUANTS DANS UN INTERVAL DE DATE

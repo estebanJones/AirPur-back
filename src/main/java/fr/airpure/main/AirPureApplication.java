@@ -15,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import fr.airpure.main.controllers.ApiExtractController;
 import fr.airpure.main.controllers.InitialDataController;
@@ -97,7 +99,7 @@ public class AirPureApplication {
 		source.registerCorsConfiguration("/**", config);
 		return new CorsFilter(source);
 	}
-	
+
 	@Bean
 	public ModelMapper modelMapper() {
 	    return new ModelMapper();
