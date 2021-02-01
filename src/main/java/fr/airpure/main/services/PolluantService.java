@@ -28,7 +28,7 @@ public class PolluantService {
 		return this.polluantRepository.save(polluant);
 	}
 
-	public List<Polluant> getDernierPolluantByStation(Integer idStation) throws NotFoundException {
+	public List<Polluant> getDernierPolluantsByStation(Integer idStation) throws NotFoundException {
 		return this.polluantRepository.getDernierPolluantByStation(idStation);
 	}
 	
@@ -38,6 +38,10 @@ public class PolluantService {
 	
 	public List<Polluant> getPolluantByIdStationAndNomAndDateDebut(Integer idStation, String nom, LocalDateTime dateDebut){
 		return this.polluantRepository.findPolluantsByIdStationAndNomAndDateDebut(idStation, nom, dateDebut);
+	}
+	
+	public List<Polluant> getPolluantsByIdStationAndDateDebutAndDateFin(int idStation, LocalDateTime dateDebut, LocalDateTime dateFin){
+		return  this.polluantRepository.findByIdAndDateDebutAndDateFin(idStation, dateDebut, dateFin);
 	}
 
 	/**
