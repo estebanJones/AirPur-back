@@ -79,7 +79,7 @@ public class AirPureApplication {
 		 */
 		//this.initDataController.initData();
 //		this.apiController.autoExtractPollution();
-		this.apiController.autoExtractMeteo();
+//		this.apiController.autoExtractMeteo();
 			
 //		System.out.println(this.communeService.getByNomAlike("Mont").get(0));
 
