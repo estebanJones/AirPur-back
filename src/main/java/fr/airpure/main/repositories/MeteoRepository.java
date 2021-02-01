@@ -20,5 +20,5 @@ public interface MeteoRepository extends JpaRepository<MeteoIndicateur, Integer>
 	@Query(value="SELECT * FROM meteo_indicateur WHERE meteo_indicateur.commune_id = :communeId ORDER BY meteo_indicateur.date DESC LIMIT 1", nativeQuery = true)
 	public Optional<MeteoIndicateur> findLastMeteoByCommune(Integer communeId);
 	
-	public List<MeteoIndicateur> findByDateBetweenAndCommuneId(LocalDateTime dateDebut, LocalDateTime dateFin, Integer communeId);
+	public List<MeteoIndicateur> findByDateBetweenAndCommuneIdOrderByDateDesc(LocalDateTime dateDebut, LocalDateTime dateFin, Integer communeId);
 }
