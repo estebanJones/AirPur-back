@@ -86,6 +86,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.permitAll()
 					.antMatchers("/station/**")
 					.permitAll()
+					.antMatchers("/notification/**")
+					.permitAll()
+					.antMatchers("/departement/**")
+					.permitAll()
 					.antMatchers("/favoris/**")
 					.permitAll()
 					// Pour tester mes requétes

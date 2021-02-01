@@ -1,5 +1,6 @@
 package fr.airpure.main.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -35,5 +36,10 @@ public class DepartementService {
 		} else {
 			throw new NotFoundException();
 		}
+	}
+	
+	public List<Departement> findAll() throws NotFoundException {
+		return this.departementRepository.findAll();
+		
 	}
 }

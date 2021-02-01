@@ -28,10 +28,12 @@ public class NotificationManager {
 	}
 
 	public NotificationDtoResponse send(DtoNotificationRequest dtoNotificationRequest) throws NotFoundException {
-		Departement departement = this.departementService.findByNom(dtoNotificationRequest.getCodeDepartement());
+		Departement departement = this.departementService.findByCodeDepartement(dtoNotificationRequest.getCodeDepartement());
 		List<Utilisateur> allUtilisateurs = this.utilisateurService.getAllUtilisateurs();
-		//Notification notification = new Notification(dtoNotificationRequest.getMessage(), allUtilisateurs, departement);
+		allUtilisateurs.forEach(utilisateur -> {
+			
+			this.notificationService.save(new Notification(dtoNotificationRequest.getMessage(), utilisateur, departement, false));
+		});
 		return new NotificationDtoResponse("Notification envoyée avec succès.");
-
 	}
 }

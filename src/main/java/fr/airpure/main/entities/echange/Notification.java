@@ -31,17 +31,19 @@ public class Notification {
 	@JoinColumn(name = "utilisateur_id")
 	private Utilisateur utilisateur;
 	
+	private Boolean readed;
 	public Notification() {
 		this.dateCreation = LocalDate.now();
 	}
 	
 	public Notification(String message, Utilisateur utilisateur,
-			Departement departement) {
+			Departement departement, Boolean readed) {
 		super();
 		this.message = message;
 		this.dateCreation = LocalDate.now();
 		this.utilisateur = utilisateur;
 		this.departement = departement;
+		this.readed = readed;
 	}
 
 	public String getMessage() {
@@ -88,13 +90,11 @@ public class Notification {
 		this.utilisateur = utilisateur;
 	}
 
-	
-	
-	// CONSTRUCTEURS
+	public Boolean getReaded() {
+		return readed;
+	}
 
-	
-	// GETTERS & SETTERS
-	
-	
-	
+	public void setReaded(Boolean readed) {
+		this.readed = readed;
+	}
 }
