@@ -79,23 +79,13 @@ public class Departement extends Entite {
 	public Departement() {}
 	
 
-	// GETTERS AND SETTERS ******************************************************************************
 
-	/**
-	 * Gets the num departement.
-	 *
-	 * @return the num departement
-	 */
-	public String getNumDepartement() {
+
+	public String getCodeDepartement() {
 		return codeDepartement;
 	}
 
-	/**
-	 * Sets the num departement.
-	 *
-	 * @param codeDepartement the new num departement
-	 */
-	public void setNumDepartement(String codeDepartement) {
+	public void setCodeDepartement(String codeDepartement) {
 		this.codeDepartement = codeDepartement;
 	}
 

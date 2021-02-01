@@ -48,11 +48,19 @@ public class FavorisController {
 		}
 	}
 
+
 	@GetMapping("releves/liste/{idUtilisateur}")
 	public ResponseEntity<?> getListeFavoris(@PathVariable("idUtilisateur") Integer idUtilisateur) {
 		List<DtoFavoris> dtoFavoris = this.favorisService.getFavorisByUtilisateur(idUtilisateur);
 		return ResponseEntity.ok(dtoFavoris);
 	}
+/*
+	@GetMapping("/mesFavoris")
+	public List<Favoris> getListeFavoris() {
+		return favorisService.getTousLesFavoris();
+
+	}
+	*/
 
 	@GetMapping("{id}")
 	public Favoris getUnFavoris(@PathVariable("id") Integer id) throws FavorisNotFoundException {

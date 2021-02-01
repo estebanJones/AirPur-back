@@ -82,9 +82,17 @@ public class FavorisService {
 	/*
 	 * Methode de recupération de la liste des Favoris
 	 */
-	public List<Favoris> getMesFavoris() {
+	public List<Favoris> getTousLesFavoris() {
 		return favorisRepository.findAll();
 	}
+	/*
+	 * Methode de recupération de la liste des Favoris de l'utilisateur
+	 */
+/*	
+	public List<Favoris> getMesFavoris() {
+		return favorisRepository.findByUtilisateurId(utilisateurId);
+	}	
+	*/
 	
 	/*
 	 * Methode de recupération de la liste des Favoris
@@ -95,8 +103,8 @@ public class FavorisService {
 		List<DtoFavoris> dtoFavoris = new ArrayList<>();
 		// pour chaque favoris je prends les infos liées
 		favoris.forEach(f -> {
-			List<MeteoIndicateur> meteoIndicateurs = this.meteoRepository.findByDateBetweenAndCommuneId(f.getChoixDateDebut(), f.getChoixDateFin(), f.getCommune().getId());
-			List<Polluant> polluants = this.polluantRepository.findByDateDebutGreaterThanEqualAndDateFinLessThanEqualAndStationCommuneId(f.getChoixDateDebut(), f.getChoixDateFin(), f.getCommune().getId());
+			List<MeteoIndicateur> meteoIndicateurs = this.meteoRepository.findByDateBetweenAndCommuneIdOrderByDateDesc(f.getChoixDateDebut(), f.getChoixDateFin(), f.getCommune().getId());
+			List<Polluant> polluants = this.polluantRepository.findByDateDebutGreaterThanEqualAndDateFinLessThanEqualAndStationCommuneIdOrderByDateDebutDesc(f.getChoixDateDebut(), f.getChoixDateFin(), f.getCommune().getId());
 			dtoFavoris.add(new DtoFavoris(meteoIndicateurs, polluants));
 		});
 		// JE DOIS PRENDRE LES METEO ET LES POLLUANTS DANS UN INTERVAL DE DATE

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import fr.airpure.main.services.StationService;
 
 @RestController
 @RequestMapping("station")
+@CrossOrigin
 public class StationController {
 	private MarkerManager markerManager;
 	private StationService stationService;
