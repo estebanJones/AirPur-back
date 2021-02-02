@@ -39,6 +39,11 @@ public class PolluantService {
 	public List<Polluant> getPolluantByIdStationAndNomAndDateDebut(Integer idStation, String nom, LocalDateTime dateDebut){
 		return this.polluantRepository.findPolluantsByIdStationAndNomAndDateDebut(idStation, nom, dateDebut);
 	}
+	
+	public List<Polluant> getHistoriquePolluantsStation(int idCommune, LocalDateTime dateDebut, LocalDateTime dateFin ){
+		//return this.polluantRepository.findPolluantsByDatesAndStationId(dateDebut, dateFin, stationId);
+		return this.polluantRepository.findByDateDebutGreaterThanEqualAndDateFinLessThanEqualAndStationCommuneId(dateDebut, dateFin, idCommune);
+	}
 
 	/**
 	 * Permet de vérifier si un polluant polluantToCheck passé en param a déjà été
@@ -48,42 +53,14 @@ public class PolluantService {
 	 * @return True si il existe, false sinon
 	 */
 	public boolean checkExistencePolluantBDD(Polluant polluantToCheck) {
-
 		List<Polluant> polluantsSimilaireExistants = this.getPolluantByIdStationAndNomAndDateDebut(polluantToCheck.getStation().getId(), 
 																									polluantToCheck.getNom(),
 																									polluantToCheck.getDateDebut() );
-		
 		if ( polluantsSimilaireExistants.size() > 0) {
 			return true;
 		} else {
 			return false;
 		}
 		
-		// On recup les relevé de pollutions le splus récent de la stations du polluant
-		// en question
-		
-		/*List<Polluant> listeLastPolluants = this.polluantRepository.getDernierPolluantByStation(polluantToCheck.getStation().getId());
-
-		boolean retour = false;
-		
-		if (listeLastPolluants.size() >= 0) {
-			// Pour chaque polluant, on regarde son nom, puis sa date
-			for (Polluant p : listeLastPolluants) {
-				if (p.getNom() == polluantToCheck.getNom()) {
-					System.out.println("nom ok");
-					if (p.getDateDebut() == polluantToCheck.getDateDebut()) {
-						System.out.println("Date Debut OK");
-						if (p.getDateFin() == polluantToCheck.getDateFin()) {
-							System.out.println("Date fin OK");
-							retour = false;
-						}
-					}
-				}
-			}
-		} else {
-			retour = false;
-		}
-		
-		return retour; */
 	}
 }
