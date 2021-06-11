@@ -1,15 +1,20 @@
 package fr.airpure.main.controllers;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.airpure.main.dto.request.FavorisDtoRequest;
@@ -26,6 +31,7 @@ import fr.airpure.main.services.StationService;
 
 @RestController
 @RequestMapping("station")
+@CrossOrigin
 public class StationController {
 	private MarkerManager markerManager;
 	private StationService stationService;
@@ -54,7 +60,7 @@ public class StationController {
 	
 	@GetMapping("{idStation}")
 	public ResponseEntity<?> getStationReleves(@PathVariable Integer idStation) throws NotFoundException {
-		List<Polluant> polluants = this.polluantService.getDernierPolluantByStation(idStation);
+		List<Polluant> polluants = this.polluantService.getDernierPolluantsByStation(idStation);
 		List<DtoReleveStation> dto = polluants.stream().map(polluant -> new DtoReleveStation(polluant)).collect(Collectors.toList());
 		return ResponseEntity.ok(dto);
 	}
@@ -71,4 +77,28 @@ public class StationController {
 			return ResponseEntity.badRequest().body("Mauvaise Requete venant du front");
 		}
 	}
+	@GetMapping("historique")
+	public ResponseEntity<?> getHistoriqueStationByDateFinDebut(@RequestParam int idStation, @RequestParam String dateDebut, @RequestParam String dateFin ){
+		
+		LocalDate startDate = LocalDate.parse(dateDebut, DateTimeFormatter.ISO_DATE_TIME); 
+		LocalDate endDate = LocalDate.parse(dateFin, DateTimeFormatter.ISO_DATE_TIME); 
+		 
+		 System.out.println("coucou");
+		 System.out.println(dateDebut);
+		 System.out.println(dateFin);
+		 System.out.println(startDate);
+		 System.out.println(endDate);
+		 
+		//List<Polluant> polluants = this.polluantService.getPolluantsByIdStationAndDateDebutAndDateFin(idStation, dateDebut, dateFin);
+		//List<DtoReleveStation> dtoS = polluants.stream().map(polluant -> new DtoReleveStation(polluant)).collect(Collectors.toList());
+		//return ResponseEntity.ok(dtoS);
+		 return ResponseEntity.ok("test");
+ 	}
+	
+//	@GetMapping("{idStation}")
+//	public ResponseEntity<?> getHistoriquePolluant(@PathVariable Integer idStation) throws NotFoundException {
+//		List<Polluant> polluants = this.polluantService.getDernierPolluantByStation(idStation);
+//		List<DtoReleveStation> dto = polluants.stream().map(polluant -> new DtoReleveStation(polluant)).collect(Collectors.toList());
+//		return ResponseEntity.ok(dto);
+//	}
 }

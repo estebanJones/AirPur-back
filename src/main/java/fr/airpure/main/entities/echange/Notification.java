@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -14,7 +17,10 @@ import fr.airpure.main.entities.Departement;
 import fr.airpure.main.entities.Utilisateur;
 
 @Entity
-public class Notification extends LongIdEntity{
+public class Notification {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private String message;
 	private LocalDate dateCreation;
 	
@@ -25,17 +31,19 @@ public class Notification extends LongIdEntity{
 	@JoinColumn(name = "utilisateur_id")
 	private Utilisateur utilisateur;
 	
+	private Boolean readed;
 	public Notification() {
 		this.dateCreation = LocalDate.now();
 	}
 	
 	public Notification(String message, Utilisateur utilisateur,
-			Departement departement) {
+			Departement departement, Boolean readed) {
 		super();
 		this.message = message;
 		this.dateCreation = LocalDate.now();
 		this.utilisateur = utilisateur;
 		this.departement = departement;
+		this.readed = readed;
 	}
 
 	public String getMessage() {
@@ -62,12 +70,14 @@ public class Notification extends LongIdEntity{
 		this.utilisateur = utilisateur;
 	}
 
-	
-	
-	// CONSTRUCTEURS
+	public Integer getId() {
+		return id;
+	}
 
-	
-	// GETTERS & SETTERS
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public Departement getDepartement() {
 		return departement;
 	}
@@ -76,6 +86,15 @@ public class Notification extends LongIdEntity{
 		this.departement = departement;
 	}
 
-	
-	
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public Boolean getReaded() {
+		return readed;
+	}
+
+	public void setReaded(Boolean readed) {
+		this.readed = readed;
+	}
 }

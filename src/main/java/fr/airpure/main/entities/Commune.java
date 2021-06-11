@@ -239,7 +239,7 @@ public class Commune extends Entite {
 		String retour = "Nom Commune : " + this.nomCommune + "\n";
 		retour += "ID Commune : " + this.getId() + "\n";
 		retour += "Code INSEE Commune : " + this.codeInseeCommune + "\n";
-		retour += "Departement : " + this.departementCommune.getNomDepartement() + " - " +  this.getDepartementCommune().getNumDepartement() + "\n";
+		retour += "Departement : " + this.departementCommune.getNomDepartement() + " - " +  this.getDepartementCommune().getCodeDepartement() + "\n";
 		retour += "Region : " + this.departementCommune.getRegionDepartement().getNomRegion() + "\n";
 		
 		return retour;
