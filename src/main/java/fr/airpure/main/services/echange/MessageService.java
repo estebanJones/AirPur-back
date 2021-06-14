@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import fr.airpure.main.entities.Utilisateur;
 import fr.airpure.main.entities.echange.Message;
 import fr.airpure.main.entities.echange.Rubrique;
-import fr.airpure.main.exceptions.FavorisNotFoundException;
 import fr.airpure.main.exceptions.echange.EchangeNotFoundException;
 import fr.airpure.main.repositories.UtilisateurRepository;
 import fr.airpure.main.repositories.echange.MessageRepo;
@@ -24,6 +23,20 @@ public class MessageService {
 	private UtilisateurRepository utilisateurRepository;
 	@Autowired
 	private MessageRepo messageRepo;
+
+	/** Constructeur juste pour les tests */
+
+	public MessageService() {
+		super();
+	}
+
+	public MessageService(RubriqueRepo rubriqueRepo, UtilisateurRepository utilisateurRepository,
+			MessageRepo messageRepo) {
+		super();
+		this.rubriqueRepo = rubriqueRepo;
+		this.utilisateurRepository = utilisateurRepository;
+		this.messageRepo = messageRepo;
+	}
 
 	/*
 	 * Methode de création de Message

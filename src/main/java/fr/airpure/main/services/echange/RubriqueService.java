@@ -20,6 +20,18 @@ public class RubriqueService {
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
 
+	/** Constructeur que pour les test */
+
+	public RubriqueService(RubriqueRepo rubriqueRepo, UtilisateurRepository utilisateurRepository) {
+		super();
+		this.rubriqueRepo = rubriqueRepo;
+		this.utilisateurRepository = utilisateurRepository;
+	}
+
+	public RubriqueService() {
+		super();
+	}
+
 	/*
 	 * Methode de création de Rubrique
 	 */
