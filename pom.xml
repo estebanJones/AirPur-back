@@ -109,6 +109,14 @@
     <version>2.3.5</version>
 </dependency>
 
+	<!-- Dependance pour mockio -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
