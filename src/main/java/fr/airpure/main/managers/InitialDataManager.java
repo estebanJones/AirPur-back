@@ -67,7 +67,7 @@ public class InitialDataManager {
 	}
 	
 	public void cleanInitialBDD() {
-		this.communeService.deleteAllCommunesHorsOccitanie();
+		//this.communeService.deleteAllCommunesHorsOccitanie();
 	}
 	
 }
