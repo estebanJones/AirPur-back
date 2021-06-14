@@ -7,15 +7,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.airpure.main.dto.request.FavorisDtoRequest;
+import fr.airpure.main.dto.request.HistoriqueDtoRequest;
 import fr.airpure.main.dto.response.DtoReleveStation;
 import fr.airpure.main.dto.response.DtoStation;
+import fr.airpure.main.dto.response.FavorisDtoResponse;
 import fr.airpure.main.entities.Polluant;
 import fr.airpure.main.entities.Station;
 import fr.airpure.main.exceptions.echange.NotFoundException;
@@ -59,6 +65,18 @@ public class StationController {
 		return ResponseEntity.ok(dto);
 	}
 	
+	@PostMapping("historique")
+	public ResponseEntity<?> getHistoriquePolluant(@RequestBody HistoriqueDtoRequest historiqueDto, BindingResult requestValid) {
+		if (!requestValid.hasErrors()) {;
+			System.out.println(historiqueDto.getIdStation() + " " + historiqueDto.getDateDebut()  + " " + historiqueDto.getDateFin());
+			List<Polluant> historiquePolluants = this.polluantService.getHistoriquePolluantsStation(historiqueDto.getIdStation(), historiqueDto.getDateDebut(), historiqueDto.getDateFin());
+			List<DtoReleveStation> dto = historiquePolluants.stream().map(polluant -> new DtoReleveStation(polluant)).collect(Collectors.toList());
+			return ResponseEntity.ok(dto);
+		}
+		else {
+			return ResponseEntity.badRequest().body("Mauvaise Requete venant du front");
+		}
+	}
 	@GetMapping("historique")
 	public ResponseEntity<?> getHistoriqueStationByDateFinDebut(@RequestParam int idStation, @RequestParam String dateDebut, @RequestParam String dateFin ){
 		
